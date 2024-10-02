@@ -8,9 +8,9 @@ def get_db_connection():
     return mysql.connector.connect(
         host='localhost',
         user='root',  # Your MySQL username
-        password='P3n15w@nk3r',  # Your MySQL password
+        password='<password>',  # Your MySQL password
         database='bookstore',
-        port=3307
+        port=3307 # default is 3306
     )
 
 # Home page to display books
