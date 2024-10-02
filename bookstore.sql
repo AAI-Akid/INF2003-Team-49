@@ -1,3 +1,4 @@
+import pandas as pd
 DROP DATABASE IF EXISTS bookstore;
 
 CREATE DATABASE bookstore;
@@ -15,3 +16,4 @@ INSERT INTO books (title, author, price) VALUES
 ('Book One', 'Author A', 9.99),
 ('Book Two', 'Author B', 12.99),
 ('Book Three', 'Author C', 15.99);
+
