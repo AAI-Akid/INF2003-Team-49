@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bookstore</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Welcome to the Bookstore</h1>
+    <ul>
+        {% for book in books %}
+        <li>
+            <strong>{{ book.title }}</strong> by {{ book.author }} - ${{ book.price }}
+            <a href="{{ url_for('add_to_cart', book_id=book.id) }}">Add to Cart</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="/cart">View Cart</a>
+    <br>
+    <a href="/admin">Admin Panel</a>
+</body>
+</html>
