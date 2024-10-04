@@ -102,14 +102,12 @@ def login():
         conn.close()
 
         if user and bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8')):
-            session['user_id'] = user['user_id']
+            session['user_id'] = user['user_id']  # Store user ID in session
             return redirect(url_for('index'))
         else:
             flash('Invalid email or password')
 
     return render_template('login.html')
-
-
 
 # User Profile route
 @app.route('/profile', methods=['GET', 'POST'])
@@ -126,7 +124,6 @@ def profile():
         cursor.execute('UPDATE users SET email = %s, password = %s, address = %s WHERE user_id = %s',
                        (new_email, bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt()), new_address, session['user_id']))
         conn.commit()
-
         flash('Profile updated successfully')
         return redirect(url_for('profile'))
 
