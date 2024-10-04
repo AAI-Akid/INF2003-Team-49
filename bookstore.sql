@@ -15,5 +15,8 @@ CREATE TABLE books (
 INSERT INTO books (title, author, price) VALUES
 ('Book One', 'Author A', 9.99),
 ('Book Two', 'Author B', 12.99),
-('Book Three', 'Author C', 15.99);
+('Book Three', 'Author C', 15.99)
+('Book Four', 'Author D', 18.99);
 
+INSERT INTO users (username, email, password, address)  VALUES 
+('admin', 'admin@example.com', 'admin', '123 Admin St');
