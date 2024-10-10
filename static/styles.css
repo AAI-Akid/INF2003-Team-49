@@ -334,3 +334,38 @@ h1 {
     background-color: transparent; /* Ensure the background is transparent */
 }
 
+.book-item {
+    background-color: #f9f9f9; /* Light background for each book item */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 15px; /* Padding inside each item */
+    margin: 10px 0; /* Space between items */
+}
+
+.book-details h2 {
+    margin: 0; /* Remove margin from the title */
+    font-size: 1.5em; /* Title font size */
+    color: #333; /* Dark color for the title */
+}
+
+.book-details p {
+    margin: 5px 0; /* Space between paragraphs */
+    line-height: 1.5; /* Improve line height for readability */
+}
+
+.add-to-cart {
+    margin-top: 10px; /* Space above the button */
+}
+
+.add-to-cart a {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 15px; /* Padding for the button */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners for the button */
+}
+
+.add-to-cart a:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+

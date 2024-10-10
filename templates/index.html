@@ -3,54 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookstore</title>
+    <title>Welcome to Our Bookstore</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            gap: 20px; /* Spacing between items */
+        }
+        .book-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .book-item img {
+            max-width: 100%; /* Ensure images are responsive */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="header-content">
             <div class="logo">
-                <img src="/static/books.png" alt="Bookstore Logo"> <!-- Replace with your logo path -->
+                <img src="/static/books/books.png" alt="Bookstore Logo">
             </div>
-            <h2 class="brand-name">BookSearch.com</h2> <!-- Added brand name in header -->
+            <h2 class="brand-name">BookSearch.com</h2>
             <div class="header-buttons">
-                <a href="/signup">Sign Up</a>
-                <a href="/login">Login</a>
-                <!-- Removed View Cart link -->
+                <a href="/login">Login</a> <!-- Link to login -->
+                <a href="/signup">Sign Up</a> <!-- Link to sign up -->
             </div>
         </div>
     </header>
 
     <main>
-        <h1>Welcome to our Bookstore!</h1>
-        <ul>
+        <h1>Welcome to our bookstore!</h1>
+        <p class="explore-books">Explore our collection of books!</p>
+        <div class="book-grid">
             {% for book in books %}
-            <li class="book-item">
-                <div class="book-details">
-                    <strong>{{ book.title }}</strong> by {{ book.author }} - ${{ book.price }}<br>
-                    <span>Rating: {{ book.rating }}</span><br>
-                    <span>Currency: {{ book.currency }}</span><br>
-                    <span>Description: {{ book.description }}</span><br>
-                    <span>Publisher: {{ book.publisher }}</span><br>
-                    <span>Page Count: {{ book.page_count }}</span><br>
-                    <span>Genres: {{ book.generes }}</span><br>
-                    <span>ISBN: {{ book.ISBN }}</span><br>
-                    <span>Language: {{ book.language }}</span><br>
-                    <span>Published Date: {{ book.published_date }}</span><br>
-                </div>
-                <!-- Removed Add to Cart button -->
-            </li>
+            <div class="book-item">
+                {% if user %}
+                <a href="{{ url_for('book_detail', book_id=book.book_id) }}">
+                {% else %}
+                <a href="/login">
+                {% endif %}
+                    <img src="{{ url_for('static', filename='images/books/' + book.cover_image) }}" alt="{{ book.title }} cover">
+                    <h2>{{ book.title }}</h2>
+                    <p>Price: ${{ book.price }}</p>
+                    <p>Rating: {{ book.rating }}</p>
+                </a>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
     </main>
-
-    <!-- Add translucent circles -->
-    <div class="circle circle1"></div>
-    <div class="circle circle2"></div>
-    <div class="circle circle3"></div>
-    <div class="circle circle4"></div>
-    <div class="circle circle5"></div>
-    <div class="circle circle6"></div>
-
+    
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="circle3"></div>
+    <div class="circle4"></div>
+    <div class="circle5"></div>
+    <div class="circle6"></div>
 </body>
 </html>

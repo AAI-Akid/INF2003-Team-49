@@ -1,0 +1,17 @@
+<main>
+    <h1>{{ book.title }}</h1>
+    <img src="{{ book.cover_image }}" alt="{{ book.title }} cover">
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <p><strong>Price:</strong> ${{ book.price }}</p>
+    <p><strong>Rating:</strong> {{ book.rating }}</p>
+    <p><strong>Description:</strong> {{ book.description }}</p>
+    <p><strong>Publisher:</strong> {{ book.publisher }}</p>
+    <p><strong>Page Count:</strong> {{ book.page_count }}</p>
+    <p><strong>Genres:</strong> {{ book.generes }}</p>
+    <p><strong>ISBN:</strong> {{ book.ISBN }}</p>
+    <p><strong>Language:</strong> {{ book.language }}</p>
+    <p><strong>Published Date:</strong> {{ book.published_date }}</p>
+    <div class="add-to-cart">
+        <a href="{{ url_for('add_to_cart', book_id=book.book_id) }}">Add to Cart</a>
+    </div>
+</main>

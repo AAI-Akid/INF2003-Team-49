@@ -3,7 +3,8 @@ import mysql.connector
 import bcrypt
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Replace with your secret key for sessions
+app.secret_key = 'your_secret_key'  # Replace with your secret key for session
+app.config['STATIC_FOLDER'] = 'static'
 
 # Database connection function
 def get_db_connection():
@@ -23,8 +24,11 @@ def index():
     cursor.execute('SELECT * FROM books')  # Fetch all books
     books = cursor.fetchall()  # Get the results as a list of dictionaries
     conn.close()
-    return render_template('index.html', books=books)  # Pass books to the template
 
+    # Assuming you have a way to check if a user is logged in and their username
+    user = None  # Replace with your user session logic to get the logged-in user, if any
+
+    return render_template('index.html', books=books, user=user)  # Pass books and user to the template
 
 
 # Admin page to add new books
@@ -199,11 +203,42 @@ def dashboard():
 
     return render_template('dashboard.html', user=user, books=books)
 
+@app.route('/book/<int:book_id>')
+def book_detail(book_id):
+    book = get_book_by_id(book_id)  # This function fetches the book details from your database
+    return render_template('book_detail.html', book=book)
+
+def get_book_by_id(book_id):
+    connection = mysql.connector.connect(user='username', password='password', host='localhost', database='your_db')
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM Books WHERE book_id = %s", (book_id,))
+    book = cursor.fetchone()
+    connection.close()
+    
+    # Convert the result to a dictionary or appropriate format
+    return {
+        'book_id': book[0],
+        'title': book[1],
+        'author': book[2],
+        'rating': book[3],
+        'price': book[4],
+        'currency': book[5],
+        'description': book[6],
+        'publisher': book[7],
+        'page_count': book[8],
+        'generes': book[9],
+        'ISBN': book[10],
+        'language': book[11],
+        'published_date': book[12],
+        'cover_image': book[13]  # Assuming you have a cover image URL in the database
+    }
+
 
 @app.route('/logout')
 def logout():
-    session.pop('user_id', None)  # Remove user_id from the session
-    return redirect(url_for('index'))  # Redirect to home page
+    session.clear()  # Clear the user session
+    return redirect(url_for('index'))  # Redirect to index page after logout
+
 
 # User Profile route
 @app.route('/profile', methods=['GET', 'POST'])

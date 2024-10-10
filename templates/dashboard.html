@@ -17,7 +17,7 @@
             display: inline-block; /* Make it behave like a button */
             cursor: default; /* Change cursor to default */
         }
-        
+
         .header-buttons a {
             text-decoration: none; /* Remove underline from link */
             padding: 10px 20px; /* Add padding for the logout link */
@@ -29,11 +29,11 @@
             align-items: center; /* Center items vertically */
             justify-content: center; /* Center items horizontally */
         }
-        
+
         .book-item {
             margin-bottom: 10px; /* Space between book items */
         }
-        
+
         .add-to-cart a {
             background-color: #007bff; /* Button background color */
             color: white; /* Button text color */
@@ -41,13 +41,30 @@
             border-radius: 5px; /* Rounded button corners */
             text-decoration: none; /* Remove underline from link */
         }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            gap: 20px; /* Spacing between items */
+        }
+
+        .book-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .book-item img {
+            max-width: 100%; /* Ensure images are responsive */
+            height: auto; /* Maintain aspect ratio */
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="header-content">
             <div class="logo">
-                <img src="/static/books.png" alt="Bookstore Logo">
+                <img src="/static/books/books.png" alt="Bookstore Logo">
             </div>
             <h2 class="brand-name">BookSearch.com</h2>
             <div class="header-buttons">
@@ -59,33 +76,24 @@
     </header>
 
     <main>
-        <main>
-            <h1>Welcome back, {{ user.username }}!</h1>
-            <p class="explore-books">Explore our collection of books!</p>
-            <ul>
-                {% for book in books %}
-                <li class="book-item">
-                    <div class="book-details">
-                        <strong>{{ book.title }}</strong> by {{ book.author }} - ${{ book.price }}<br>
-                        <span>Rating: {{ book.rating }}</span><br>
-                        <span>Currency: {{ book.currency }}</span><br>
-                        <span>Description: {{ book.description }}</span><br>
-                        <span>Publisher: {{ book.publisher }}</span><br>
-                        <span>Page Count: {{ book.page_count }}</span><br>
-                        <span>Genres: {{ book.generes }}</span><br>
-                        <span>ISBN: {{ book.ISBN }}</span><br>
-                        <span>Language: {{ book.language }}</span><br>
-                        <span>Published Date: {{ book.published_date }}</span><br>
-                    </div>
-                    <div class="add-to-cart">
-                        <a href="{{ url_for('add_to_cart', book_id=book.book_id) }}">Add to Cart</a>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-        </main>
-        
-    
+        <h1>Welcome back, {{ user.username }}!</h1>
+        <p class="explore-books">Explore our collection of books!</p>
+        <div class="book-grid">
+            {% for book in books %}
+            <div class="book-item">
+                <a href="{{ url_for('book_detail', book_id=book.book_id) }}">
+                    <!-- Corrected image path -->
+                    <img src="{{ url_for('static', filename='images/books/' + book.cover_image) }}" alt="{{ book.title }} cover">
+                    
+                    <h2>{{ book.title }}</h2>
+                    <p>Price: ${{ book.price }} USD</p>
+                    <p>Rating: {{ book.rating }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
     <div class="circle1"></div>
     <div class="circle2"></div>
     <div class="circle3"></div>
