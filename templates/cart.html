@@ -1,16 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Cart</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        /* Main heading styling */
+        h1 {
+            font-size: 3em; /* Heading size */
+            color: #ffffff; /* White color for the heading */
+            margin-bottom: 20px; /* Spacing below the heading */
+            font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Consistent font */
+        }
+
+        /* Cart item list styling */
+        ul {
+            list-style-type: none; /* Remove default list styling */
+            padding: 0; /* No padding */
+            max-width: 600px; /* Limit the width of the cart */
+            margin: 0 auto; /* Center the list */
+        }
+
+        /* Individual cart item styling */
+        li {
+            background-color: #ecf0f1; /* Light gray background for items */
+            padding: 15px; /* Padding for each item */
+            margin: 10px 0; /* Space between items */
+            border-radius: 5px; /* Rounded corners */
+            display: flex; /* Flexbox layout */
+            justify-content: space-between; /* Space between item details and price */
+            align-items: center; /* Center items vertically */
+            color: #333; /* Dark text for visibility */
+        }
+
+        
+    </style>
 </head>
 <body>
     <h1>Your Cart</h1>
     <ul>
         {% for book in cart %}
-        <li>{{ book.title }} by {{ book.author }} - ${{ book.price }}</li>
+        <li>
+            <span>{{ book.title }} by {{ book.author }}</span>
+            <span>${{ book.price }}</span>
+        </li>
         {% endfor %}
     </ul>
-    <a href="/">Continue Shopping</a>
+
+    <a href="/clear_cart" class="clear-cart-button">Clear Cart</a> <!-- Clear Cart Button -->
+    <a href="/dashboard" class="continue-shopping">Continue Shopping</a> <!-- Continue Shopping Button -->
 </body>
 </html>

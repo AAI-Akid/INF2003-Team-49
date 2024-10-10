@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        .logged-in {
+            padding: 10px 20px; /* Add padding for the 'Logged In' box */
+            background-color: white; /* White background */
+            color: #333; /* Text color */
+            border: 2px solid #ffffff; /* Optional: border color */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 18px; /* Make the text bigger */
+            margin-right: 10px; /* Space between buttons */
+            display: inline-block; /* Make it behave like a button */
+            cursor: default; /* Change cursor to default */
+        }
+        
+        .header-buttons a {
+            text-decoration: none; /* Remove underline from link */
+            padding: 10px 20px; /* Add padding for the logout link */
+            background-color: #000000; /* Button background color */
+            color: white; /* Button text color */
+            border-radius: 5px; /* Rounded button corners */
+            margin-left: 10px; /* Space between buttons */
+            display: flex; /* Use flexbox for centering */
+            align-items: center; /* Center items vertically */
+            justify-content: center; /* Center items horizontally */
+        }
+        
+        .book-item {
+            margin-bottom: 10px; /* Space between book items */
+        }
+        
+        .add-to-cart a {
+            background-color: #007bff; /* Button background color */
+            color: white; /* Button text color */
+            padding: 5px 10px; /* Button padding */
+            border-radius: 5px; /* Rounded button corners */
+            text-decoration: none; /* Remove underline from link */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="/static/books.png" alt="Bookstore Logo">
+            </div>
+            <h2 class="brand-name">BookSearch.com</h2>
+            <div class="header-buttons">
+                <span class="logged-in">Logged In</span> <!-- Unclickable logged in button -->
+                <a href="/cart">View Cart</a> <!-- Added View Cart link -->
+                <a href="/logout">Logout</a> <!-- Option to logout -->
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1>Welcome back, {{ user.username }}!</h1>
+        <p>Explore our collection of books!</p>
+        <ul>
+            {% for book in books %}
+            <li class="book-item">
+                <div class="book-details">
+                    <strong>{{ book.title }}</strong> by {{ book.author }} - ${{ book.price }}
+                </div>
+                <div class="add-to-cart">
+                    <a href="{{ url_for('add_to_cart', book_id=book.id) }}">Add to Cart</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+    
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="circle3"></div>
+    <div class="circle4"></div>
+    <div class="circle5"></div>
+    <div class="circle6"></div>
+</body>
+</html>

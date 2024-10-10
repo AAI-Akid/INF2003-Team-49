@@ -16,22 +16,20 @@
             <div class="header-buttons">
                 <a href="/signup">Sign Up</a>
                 <a href="/login">Login</a>
-                <a href="/cart">View Cart</a>
+                <!-- Removed View Cart link -->
             </div>
         </div>
     </header>
 
     <main>
-        <h1>Welcome to our Bookstore</h1>
+        <h1>Welcome to our Bookstore!</h1>
         <ul>
             {% for book in books %}
             <li class="book-item">
                 <div class="book-details">
                     <strong>{{ book.title }}</strong> by {{ book.author }} - ${{ book.price }}
                 </div>
-                <div class="add-to-cart">
-                    <a href="{{ url_for('add_to_cart', book_id=book.id) }}">Add to Cart</a>
-                </div>
+                <!-- Removed Add to Cart button -->
             </li>
             {% endfor %}
         </ul>

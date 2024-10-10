@@ -130,81 +130,165 @@ li strong {
 }
 
 /* circles */
-.circle1 {
-    position: absolute; 
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    width: 600px; 
-    height: 600px; 
-    top: -250px; /* Adjusted position */
-    left: -200px; /* Adjusted position */
-    z-index: -1; 
-    backdrop-filter: blur(10px); 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
-}
-
-.circle2 {
-    position: absolute; 
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    width: 700px; 
-    height: 700px; 
-    bottom: -300px; /* Adjusted position */
-    right: -200px; /* Adjusted position */
-    z-index: -1; 
-    backdrop-filter: blur(10px); 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
-}
-
-.circle3 {
-    position: absolute; 
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    width: 650px; 
-    height: 650px; 
-    top: 300px; /* Adjusted position */
-    left: -150px; /* Adjusted position */
-    z-index: -1; 
-    backdrop-filter: blur(10px); 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
-}
-
-.circle4 {
-    position: absolute; 
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    width: 800px; 
-    height: 800px; 
-    bottom: 200px; /* Adjusted position */
-    left: 50px; /* Adjusted position */
-    z-index: -1; 
-    backdrop-filter: blur(10px); 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
-}
-
-/* New circle styles */
-.circle5 {
-    position: absolute; 
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    width: 750px; 
-    height: 750px; 
-    top: 600px; /* Positioning it lower */
-    right: -350px; /* Positioning it */
-    z-index: -1; 
-    backdrop-filter: blur(10px); 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
-}
-
+.circle1,
+.circle2,
+.circle3,
+.circle4,
+.circle5,
 .circle6 {
     position: absolute; 
     background: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
+    z-index: -1; 
+    backdrop-filter: blur(10px); 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+}
+
+.circle1 {
+    width: 600px; 
+    height: 600px; 
+    top: -250px; /* Adjusted position */
+    left: -200px; /* Adjusted position */
+}
+
+.circle2 {
+    width: 700px; 
+    height: 700px; 
+    bottom: -300px; /* Adjusted position */
+    right: -200px; /* Adjusted position */
+}
+
+.circle3 {
+    width: 650px; 
+    height: 650px; 
+    top: 300px; /* Adjusted position */
+    left: -150px; /* Adjusted position */
+}
+
+.circle4 {
+    width: 800px; 
+    height: 800px; 
+    bottom: 200px; /* Adjusted position */
+    left: 50px; /* Adjusted position */
+}
+
+/* New circle styles */
+.circle5 {
+    width: 750px; 
+    height: 750px; 
+    top: 600px; /* Positioning it lower */
+    right: -350px; /* Positioning it */
+}
+
+.circle6 {
     width: 900px; 
     height: 900px; 
     bottom: 400px; /* Positioning it lower */
     left: -450px; /* Positioning it */
-    z-index: -1; 
-    backdrop-filter: blur(10px); 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+}
+
+/* Additional styles for the login page */
+form {
+    max-width: 400px; /* Limit form width */
+    margin: 20px auto; /* Center the form */
+    padding: 20px;
+    background: rgba(230, 230, 230, 0.781); /* Slightly transparent white for the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+}
+
+label {
+    color: #333; /* Darken label color for contrast */
+    font-size: 1.2em; /* Increase label font size */
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%; /* Full-width inputs */
+    padding: 10px; /* Add some padding */
+    margin: 10px 0; /* Space between inputs */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+    text-align: center; /* Center text inside the input fields */
+    box-sizing: border-box; /* Ensures padding does not affect width */
+}
+
+button {
+    background-color: #28a745; /* Green background for button */
+    color: white; /* White text */
+    padding: 10px 15px; /* Button padding */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Button text size */
+    width: 100%; /* Make button full-width */
+}
+
+button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.signup-prompt {
+    text-align: center; /* Center the signup prompt */
+    margin-top: 20px; /* Space above */
+    color: #ffffff; /* Light blue text color */
+}
+
+.signup-prompt a {
+    color: #3498db; /* Light blue link color */
+    text-decoration: none;
+}
+
+.signup-prompt a:hover {
+    color: #2980b9; /* Darker blue on hover */
+}
+
+.underline-signup {
+    text-decoration: underline;
+    color: #3498db; /* Light blue color for the "Sign up!" */
+    cursor: pointer; /* Adds a pointer when hovered */
+}
+
+.underline-signup:hover {
+    color: #2980b9; /* Darker blue on hover */
+}
+
+/* Clear cart button styling */
+.clear-cart-button {
+    background-color: #ff4d4d; /* Red background for clear action */
+    color: white; /* White text color */
+    padding: 10px 20px; /* Button padding */
+    border-radius: 5px; /* Rounded button corners */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make it behave like a button */
+    margin: 20px auto; /* Center the button */
+    font-size: 1.2em; /* Increase font size */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.clear-cart-button:hover {
+    background-color: #ff1a1a; /* Darker red on hover */
+}
+
+/* Continue shopping button styling */
+a.continue-shopping {
+    background-color: #3498db; /* Blue background for continue shopping */
+    color: white; /* White text */
+    padding: 10px 20px; /* Button padding */
+    border-radius: 5px; /* Rounded button corners */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make it behave like a button */
+    font-size: 1.2em; /* Increase font size */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+a.continue-shopping:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+
+.flash-message {
+    color: #ff0000; /* Choose a lighter color for visibility */
+    font-weight: bold; /* Optional: make it bold */
+    margin-top: 10px; /* Add some space above */
 }

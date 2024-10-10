@@ -55,12 +55,32 @@ def add_to_cart(book_id):
     book = cursor.fetchone()
     conn.close()
 
-    cart.append(book)
-    return redirect(url_for('index'))
+    # Check if cart exists in session; if not, create it
+    if 'cart' not in session:
+        session['cart'] = []  # Initialize an empty cart if it doesn't exist
+
+    # Append the book to the cart
+    session['cart'].append(book)
+
+    # Save the updated cart back to the session
+    session.modified = True  # Mark session as modified to ensure changes are saved
+
+    # Redirect to the dashboard
+    return redirect(url_for('dashboard'))
 
 @app.route('/cart')
 def view_cart():
+    # Get the cart from the session
+    cart = session.get('cart', [])
     return render_template('cart.html', cart=cart)
+
+@app.route('/clear_cart')
+def clear_cart():
+    session.pop('cart', None)  # Clear the cart from the session
+    flash('Your cart has been cleared.')  # Optional: flash a message
+    return redirect(url_for('view_cart'))  # Redirect to the cart page
+
+
 
 # Signup route
 @app.route('/signup', methods=['GET', 'POST'])
@@ -76,15 +96,22 @@ def signup():
 
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO users (username, email, password, address) VALUES (%s, %s, %s, %s)',
-                       (username, email, hashed_password, address))
-        conn.commit()
-        conn.close()
 
-        return redirect(url_for('login'))
+        try:
+            # Insert a new user (user_id is auto-incremented)
+            cursor.execute('INSERT INTO users (username, email, password, address) VALUES (%s, %s, %s, %s)',
+                           (username, email, hashed_password, address))
+            conn.commit()
+            flash('Sign up successful! Please log in.')
+            return redirect(url_for('login'))
+        except mysql.connector.Error as err:
+            flash(f'Error: {err}')
+        finally:
+            conn.close()
 
     return render_template('signup.html')
 
+# Login route
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -103,11 +130,41 @@ def login():
 
         if user and bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8')):
             session['user_id'] = user['user_id']  # Store user ID in session
-            return redirect(url_for('index'))
+            session.pop('cart', None)  # Clear the cart upon login
+            return redirect(url_for('dashboard'))  # Redirect to dashboard
+
         else:
-            flash('Invalid email or password')
+            flash('Invalid email or password!')
 
     return render_template('login.html')
+
+
+# Dashboard route
+@app.route('/dashboard')
+def dashboard():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))  # Redirect to login if not logged in
+
+    conn = get_db_connection()
+    
+    # Fetch the current user
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute('SELECT * FROM users WHERE user_id = %s', (session['user_id'],))
+    user = cursor.fetchone()
+
+    # Fetch the books
+    cursor.execute('SELECT * FROM books')  # Adjust this query if your books table is named differently
+    books = cursor.fetchall()  # Fetch all books
+
+    conn.close()
+
+    return render_template('dashboard.html', user=user, books=books)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)  # Remove user_id from the session
+    return redirect(url_for('index'))  # Redirect to home page
 
 # User Profile route
 @app.route('/profile', methods=['GET', 'POST'])
