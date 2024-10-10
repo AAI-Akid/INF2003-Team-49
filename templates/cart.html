@@ -40,12 +40,16 @@
 <body>
     <h1>Your Cart</h1>
     <ul>
-        {% for book in cart %}
-        <li>
-            <span>{{ book.title }} by {{ book.author }}</span>
-            <span>${{ book.price }}</span>
-        </li>
-        {% endfor %}
+        {% if cart_items | length == 0 %}
+            <li>Cart is empty!</li>
+        {% else %}
+            {% for book in cart_items %}
+            <li>
+                <span>{{ book.title }} by {{ book.author }}</span>
+                <span>${{ book.price }}</span>
+            </li>
+            {% endfor %}
+        {% endif %}
     </ul>
 
     <a href="/clear_cart" class="clear-cart-button">Clear Cart</a> <!-- Clear Cart Button -->

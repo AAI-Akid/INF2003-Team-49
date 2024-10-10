@@ -261,7 +261,6 @@ button:hover {
     border-radius: 5px; /* Rounded button corners */
     text-decoration: none; /* Remove underline */
     display: inline-block; /* Make it behave like a button */
-    margin: 20px auto; /* Center the button */
     font-size: 1.2em; /* Increase font size */
     transition: background-color 0.3s; /* Smooth transition */
 }
@@ -286,9 +285,52 @@ a.continue-shopping:hover {
     background-color: #2980b9; /* Darker blue on hover */
 }
 
+/* New CSS for button alignment */
+.cart-actions {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Space between buttons */
+    align-items: center; /* Center align items vertically */
+}
+
+.clear-cart-button, a.continue-shopping {
+    margin: 0 10px; /* Adjust margin for spacing between buttons */
+}
+
+
 
 .flash-message {
     color: #ff0000; /* Choose a lighter color for visibility */
     font-weight: bold; /* Optional: make it bold */
     margin-top: 10px; /* Add some space above */
 }
+
+.explore-books {
+    color: #e0e0e0; /* Light gray color */
+    font-size: 1.2em; /* Optional: adjust font size */
+    /* You can add more styles here if needed */
+}
+
+/* Heading styling */
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
+}
+
+/* Adjust the heading color specifically for the login page */
+.login-header h1 {
+    color: #ffffff; /* Set to a darker color for better visibility */
+}
+
+
+/* Specific header style for the login page */
+.login-header {
+    display: flex; /* Use flexbox */
+    justify-content: flex-end; /* Align items to the right */
+    color: rgb(255, 255, 255); /* Change header text color to white */
+    margin-top: 100px; /* Add some space above the header */
+    margin-bottom: 20px; /* Optional: Add some space below the header */
+    padding-right: 1110px; /* Add some padding to the right for spacing */
+    background-color: transparent; /* Ensure the background is transparent */
+}
+

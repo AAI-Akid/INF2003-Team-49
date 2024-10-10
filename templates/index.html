@@ -27,7 +27,16 @@
             {% for book in books %}
             <li class="book-item">
                 <div class="book-details">
-                    <strong>{{ book.title }}</strong> by {{ book.author }} - ${{ book.price }}
+                    <strong>{{ book.title }}</strong> by {{ book.author }} - ${{ book.price }}<br>
+                    <span>Rating: {{ book.rating }}</span><br>
+                    <span>Currency: {{ book.currency }}</span><br>
+                    <span>Description: {{ book.description }}</span><br>
+                    <span>Publisher: {{ book.publisher }}</span><br>
+                    <span>Page Count: {{ book.page_count }}</span><br>
+                    <span>Genres: {{ book.generes }}</span><br>
+                    <span>ISBN: {{ book.ISBN }}</span><br>
+                    <span>Language: {{ book.language }}</span><br>
+                    <span>Published Date: {{ book.published_date }}</span><br>
                 </div>
                 <!-- Removed Add to Cart button -->
             </li>

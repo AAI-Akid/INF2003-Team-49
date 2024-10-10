@@ -5,10 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="/static/styles.css">  <!-- Link to your CSS file -->
+    <style>
+        
+
+        /* Additional styles for the form */
+        #login-form {
+            max-width: 400px; /* Optional: limit the form width */
+            margin: 20px auto; /* Center the form on the page */
+            padding: 20px; /* Add some padding */
+            border: 1px solid #ccc; /* Optional: add a border */
+            border-radius: 5px; /* Optional: add rounded corners */
+            background-color: #f9f9f9; /* Optional: light background color */
+        }
+
+        .form-label {
+            display: block; /* Display labels as block elements */
+            margin: 10px 0 5px; /* Add some margin */
+        }
+
+        button {
+            margin-top: 15px; /* Add some space above the button */
+            background-color: #3498db; /* Button color */
+            color: white; /* Button text color */
+            border: none; /* Remove default border */
+            padding: 10px 20px; /* Button padding */
+            border-radius: 5px; /* Rounded corners for button */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+
+        .signup-prompt {
+            text-align: center; /* Center the signup prompt */
+            margin-top: 20px; /* Add some margin above the prompt */
+        }
+
+        .flash-message {
+            color: red; /* Change flash message color to red */
+            text-align: center; /* Center flash messages */
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Please Log In</h1>  <!-- Large header added -->
+    <header class="login-header">
+        <h1>Please Log In</h1>
     </header>
 
     <main>
@@ -32,7 +75,7 @@
             {% endfor %}
             </ul>
         {% endif %}
-    {% endwith %}
+        {% endwith %}
     </main>
 
     <footer>

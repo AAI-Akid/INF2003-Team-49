@@ -59,21 +59,32 @@
     </header>
 
     <main>
-        <h1>Welcome back, {{ user.username }}!</h1>
-        <p>Explore our collection of books!</p>
-        <ul>
-            {% for book in books %}
-            <li class="book-item">
-                <div class="book-details">
-                    <strong>{{ book.title }}</strong> by {{ book.author }} - ${{ book.price }}
-                </div>
-                <div class="add-to-cart">
-                    <a href="{{ url_for('add_to_cart', book_id=book.id) }}">Add to Cart</a>
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
-    </main>
+        <main>
+            <h1>Welcome back, {{ user.username }}!</h1>
+            <p class="explore-books">Explore our collection of books!</p>
+            <ul>
+                {% for book in books %}
+                <li class="book-item">
+                    <div class="book-details">
+                        <strong>{{ book.title }}</strong> by {{ book.author }} - ${{ book.price }}<br>
+                        <span>Rating: {{ book.rating }}</span><br>
+                        <span>Currency: {{ book.currency }}</span><br>
+                        <span>Description: {{ book.description }}</span><br>
+                        <span>Publisher: {{ book.publisher }}</span><br>
+                        <span>Page Count: {{ book.page_count }}</span><br>
+                        <span>Genres: {{ book.generes }}</span><br>
+                        <span>ISBN: {{ book.ISBN }}</span><br>
+                        <span>Language: {{ book.language }}</span><br>
+                        <span>Published Date: {{ book.published_date }}</span><br>
+                    </div>
+                    <div class="add-to-cart">
+                        <a href="{{ url_for('add_to_cart', book_id=book.book_id) }}">Add to Cart</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </main>
+        
     
     <div class="circle1"></div>
     <div class="circle2"></div>

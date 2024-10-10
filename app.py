@@ -20,10 +20,12 @@ def get_db_connection():
 def index():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute('SELECT * FROM books')
-    books = cursor.fetchall()
+    cursor.execute('SELECT * FROM books')  # Fetch all books
+    books = cursor.fetchall()  # Get the results as a list of dictionaries
     conn.close()
-    return render_template('index.html', books=books)
+    return render_template('index.html', books=books)  # Pass books to the template
+
+
 
 # Admin page to add new books
 @app.route('/admin', methods=['GET', 'POST'])
@@ -49,36 +51,73 @@ cart = []
 
 @app.route('/add_to_cart/<int:book_id>')
 def add_to_cart(book_id):
+    if 'user_id' not in session:
+        return redirect(url_for('login'))  # Redirect to login if not logged in
+    
     conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute('SELECT * FROM books WHERE id = %s', (book_id,))
-    book = cursor.fetchone()
-    conn.close()
+    cursor = conn.cursor()
+    
+    try:
+        # Insert the book into the cart_items table
+        cursor.execute('INSERT INTO cart_items (user_id, book_id) VALUES (%s, %s)', (session['user_id'], book_id))
+        conn.commit()
+        
+        # Check if the insertion was successful
+        if cursor.rowcount == 0:
+            print("No rows inserted.")  # No rows were inserted
+        else:
+            print("Book added to cart successfully.")  # Successfully added
 
-    # Check if cart exists in session; if not, create it
-    if 'cart' not in session:
-        session['cart'] = []  # Initialize an empty cart if it doesn't exist
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")  # Print the error for debugging
+    finally:
+        cursor.close()
+        conn.close()
+    
+    return redirect(url_for('dashboard'))  # Redirect back to dashboard after adding to cart
 
-    # Append the book to the cart
-    session['cart'].append(book)
-
-    # Save the updated cart back to the session
-    session.modified = True  # Mark session as modified to ensure changes are saved
-
-    # Redirect to the dashboard
-    return redirect(url_for('dashboard'))
 
 @app.route('/cart')
 def view_cart():
-    # Get the cart from the session
-    cart = session.get('cart', [])
-    return render_template('cart.html', cart=cart)
+    if 'user_id' not in session:
+        return redirect(url_for('login'))  # Redirect to login if not logged in
+    
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    # Fetch items from the cart for the logged-in user
+    cursor.execute('''
+        SELECT ci.*, b.title, b.price FROM cart_items ci
+        JOIN books b ON ci.book_id = b.book_id
+        WHERE ci.user_id = %s
+    ''', (session['user_id'],))
+    
+    cart_items = cursor.fetchall()
+    conn.close()
+    
+    return render_template('cart.html', cart_items=cart_items)
+
 
 @app.route('/clear_cart')
 def clear_cart():
-    session.pop('cart', None)  # Clear the cart from the session
+    if 'user_id' not in session:
+        return redirect(url_for('login'))  # Redirect to login if not logged in
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute('DELETE FROM cart_items WHERE user_id = %s', (session['user_id'],))
+        conn.commit()
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")  # Print the error for debugging
+    finally:
+        cursor.close()
+        conn.close()
+    
     flash('Your cart has been cleared.')  # Optional: flash a message
     return redirect(url_for('view_cart'))  # Redirect to the cart page
+
 
 
 
