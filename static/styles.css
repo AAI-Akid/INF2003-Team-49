@@ -1,0 +1,210 @@
+/* General body styling */
+body {
+    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
+    background-color: #000000; /* Black background */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Header styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff; /* White background for the header */
+    color: #333333; /* Change text color to contrast with white */
+    border-radius: 10px; /* Rounded borders for the header */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+    position: relative; /* Make header relative for absolute positioning of children */
+}
+
+/* Header content flex styling */
+.header-content {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space out items */
+    align-items: center; /* Center items vertically */
+    width: 100%; /* Take full width */
+}
+
+/* Logo styling */
+.logo img {
+    height: 50px; /* Adjust height as needed */
+}
+
+/* Brand name styling */
+.brand-name {
+    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
+    font-size: 2.5em; /* Adjust size as needed */
+    color: #006199; /* Dark blue color for visibility */
+    position: absolute; /* Position the brand name absolutely */
+    left: 1100px; /* Adjust this value to move left/right */
+    top: -8px; /* Adjust this value to move up/down */
+    text-align: left; /* or right, based on preference */
+}
+
+/* Header buttons styling */
+.header-buttons {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+
+.header-buttons a {
+    color: #fff;
+    text-decoration: none;
+    background-color: #000000; /* Button background color */
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.header-buttons a:hover {
+    background-color: #2980b9;
+}
+
+/* Main content styling */
+main {
+    margin-top: 20px;
+}
+
+/* Heading styling */
+h1 {
+    font-size: 3em;
+    color: #ffffff; /* Change to white for better visibility */
+    margin-bottom: 20px;
+    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
+}
+
+/* Book list styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.book-item {
+    display: flex; /* Use flexbox to arrange items */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Center items vertically */
+    background-color: #ecf0f1;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.book-item:hover {
+    background-color: #bdc3c7;
+}
+
+.book-details {
+    flex: 1; /* Allow details to grow */
+    text-align: left; /* Align text to the left */
+    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
+}
+
+.add-to-cart {
+    margin-left: 15px; /* Space between details and button */
+}
+
+.add-to-cart a {
+    color: #fff;
+    text-decoration: none;
+    background-color: #3498db; /* Button background color */
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart a:hover {
+    background-color: #2980b9;
+}
+
+/* List item strong styling */
+li strong {
+    font-size: 1.5em;
+    color: #e74c3c;
+    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
+}
+
+/* circles */
+.circle1 {
+    position: absolute; 
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 600px; 
+    height: 600px; 
+    top: -250px; /* Adjusted position */
+    left: -200px; /* Adjusted position */
+    z-index: -1; 
+    backdrop-filter: blur(10px); 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+}
+
+.circle2 {
+    position: absolute; 
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 700px; 
+    height: 700px; 
+    bottom: -300px; /* Adjusted position */
+    right: -200px; /* Adjusted position */
+    z-index: -1; 
+    backdrop-filter: blur(10px); 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+}
+
+.circle3 {
+    position: absolute; 
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 650px; 
+    height: 650px; 
+    top: 300px; /* Adjusted position */
+    left: -150px; /* Adjusted position */
+    z-index: -1; 
+    backdrop-filter: blur(10px); 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+}
+
+.circle4 {
+    position: absolute; 
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 800px; 
+    height: 800px; 
+    bottom: 200px; /* Adjusted position */
+    left: 50px; /* Adjusted position */
+    z-index: -1; 
+    backdrop-filter: blur(10px); 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+}
+
+/* New circle styles */
+.circle5 {
+    position: absolute; 
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 750px; 
+    height: 750px; 
+    top: 600px; /* Positioning it lower */
+    right: -350px; /* Positioning it */
+    z-index: -1; 
+    backdrop-filter: blur(10px); 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+}
+
+.circle6 {
+    position: absolute; 
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 900px; 
+    height: 900px; 
+    bottom: 400px; /* Positioning it lower */
+    left: -450px; /* Positioning it */
+    z-index: -1; 
+    backdrop-filter: blur(10px); 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+}

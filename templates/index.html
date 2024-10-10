@@ -1,26 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookstore</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>Welcome to the Bookstore</h1>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="/static/books.png" alt="Bookstore Logo"> <!-- Replace with your logo path -->
+            </div>
+            <h2 class="brand-name">BookSearch.com</h2> <!-- Added brand name in header -->
+            <div class="header-buttons">
+                <a href="/signup">Sign Up</a>
+                <a href="/login">Login</a>
+                <a href="/cart">View Cart</a>
+            </div>
+        </div>
+    </header>
 
-    <a href="/login">Login</a>
-    <br>
-    <a href="/signup">Sign Up</a>
+    <main>
+        <h1>Welcome to our Bookstore</h1>
+        <ul>
+            {% for book in books %}
+            <li class="book-item">
+                <div class="book-details">
+                    <strong>{{ book.title }}</strong> by {{ book.author }} - ${{ book.price }}
+                </div>
+                <div class="add-to-cart">
+                    <a href="{{ url_for('add_to_cart', book_id=book.id) }}">Add to Cart</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
 
-    <ul>
-        {% for book in books %}
-        <li>
-            <strong>{{ book.title }}</strong> by {{ book.author }} - ${{ book.price }}
-            <a href="{{ url_for('add_to_cart', book_id=book.id) }}">Add to Cart</a>
-        </li>
-        {% endfor %}
-    </ul>
-    <a href="/cart">View Cart</a>
-    <br>
-    <a href="/admin">Admin Panel</a>
+    <!-- Add translucent circles -->
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+    <div class="circle circle4"></div>
+    <div class="circle circle5"></div>
+    <div class="circle circle6"></div>
+
 </body>
 </html>
