@@ -9,7 +9,7 @@
         .container {
             max-width: 1000px;
             margin: 70px auto;
-            padding: 10px;
+            padding: 30px;
             border: 2px solid #ccc;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -19,6 +19,8 @@
         h1 {
             text-align: center;
             color: #333;
+            font-size: 40px;
+            margin-top: 20px;
         }
 
         .book-details {
@@ -36,6 +38,7 @@
             max-width: 100%;
             height: auto;
             border-radius: 4px;
+            margin-top: 20px;
         }
 
         .book-info {
@@ -57,19 +60,17 @@
             margin-top: 20px; /* Space above buttons */
         }
 
-        .button {
-            width: 200px; /* Set a fixed width for both buttons */
+ 
+        .add-to-carts-btn {
+            background-color: #007bff;
+            color: white;
+            width: 230px; /* Set a fixed width for both buttons */
             text-align: center; /* Center text inside buttons */
             padding: 10px 15px; /* Consistent padding */
             border-radius: 5px; /* Consistent border radius */
             border: none; /* No border */
             cursor: pointer; /* Change cursor to pointer */
             margin-bottom: 10px; /* Space between buttons */
-        }
-
-        .add-to-carts-btn {
-            background-color: #007bff;
-            color: white;
         }
 
         .add-to-carts-btn:hover {
@@ -80,6 +81,13 @@
             background-color: #007bff; /* Same color as Add to Cart */
             color: white;
             text-decoration: none; /* Remove underline */
+            width: 200px; /* Set a fixed width for both buttons */
+            text-align: center; /* Center text inside buttons */
+            padding: 10px 15px; /* Consistent padding */
+            border-radius: 5px; /* Consistent border radius */
+            border: none; /* No border */
+            cursor: pointer; /* Change cursor to pointer */
+            margin-bottom: 10px; /* Space between buttons */
         }
 
         .back-btn:hover {
@@ -109,9 +117,9 @@
         </div>
         <div class="button-container">
             <form action="{{ url_for('add_to_cart', book_id=book.book_id) }}" method="POST">
-                <button type="submit" class="button add-to-carts-btn">Add to Cart</button>
+                <button type="submit" class="add-to-carts-btn">Add to Cart</button>
             </form>            
-            <a href="{{ url_for('dashboard') }}" class="button back-btn">Back to Dashboard</a>
+            <a href="{{ url_for('dashboard') }}" class="back-btn">Back to Dashboard</a>
         </div>
     </div>
 </body>
