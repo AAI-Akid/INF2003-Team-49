@@ -57,24 +57,20 @@
             margin-top: 20px; /* Space above buttons */
         }
 
-        .add-to-carts-btn, .back-btn {
+        .button {
             width: 200px; /* Set a fixed width for both buttons */
             text-align: center; /* Center text inside buttons */
             padding: 10px 15px; /* Consistent padding */
-            border-radius: 4px; /* Consistent border radius */
-            box-shadow: none; /* Remove any default box shadow */
-            outline: none; /* Remove focus outline */
+            border-radius: 5px; /* Consistent border radius */
+            border: none; /* No border */
+            cursor: pointer; /* Change cursor to pointer */
+            margin-bottom: 10px; /* Space between buttons */
         }
 
         .add-to-carts-btn {
             background-color: #007bff;
             color: white;
-            border: none; /* Remove border */
-            cursor: pointer;
-            margin-bottom: 10px; /* Space between buttons */
         }
-
-    
 
         .add-to-carts-btn:hover {
             background-color: #0056b3; /* Darker shade on hover */
@@ -83,8 +79,7 @@
         .back-btn {
             background-color: #007bff; /* Same color as Add to Cart */
             color: white;
-            text-decoration: none;
-            border: none; /* Remove border */
+            text-decoration: none; /* Remove underline */
         }
 
         .back-btn:hover {
@@ -114,10 +109,9 @@
         </div>
         <div class="button-container">
             <form action="{{ url_for('add_to_cart', book_id=book.book_id) }}" method="POST">
-                <button type="submit" class="add-to-carts-btn">Add to Cart</button>
+                <button type="submit" class="button add-to-carts-btn">Add to Cart</button>
             </form>            
-            </form>
-            <a href="{{ url_for('dashboard') }}" class="back-btn">Back to Dashboard</a>
+            <a href="{{ url_for('dashboard') }}" class="button back-btn">Back to Dashboard</a>
         </div>
     </div>
 </body>

@@ -34,7 +34,16 @@ header {
     height: 50px; /* Adjust height as needed */
 }
 
-
+/* Brand name styling */
+.brand-name {
+    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
+    font-size: 2.5em; /* Adjust size as needed */
+    color: #006199; /* Dark blue color for visibility */
+    position: absolute; /* Position the brand name absolutely */
+    left: 950px; /* Adjust this value to move left/right */
+    top: -8px; /* Adjust this value to move up/down */
+    text-align: left; /* or right, based on preference */
+}
 
 /* Header buttons styling */
 .header-buttons {
@@ -161,15 +170,7 @@ li strong {
     left: -450px; /* Positioning it */
 }
 
-/* Additional styles for the login page */
-form {
-    max-width: 400px; /* Limit form width */
-    margin: 20px auto; /* Center the form */
-    padding: 20px;
-    background: rgba(230, 230, 230, 0.781); /* Slightly transparent white for the form */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
-}
+
 
 label {
     color: #333; /* Darken label color for contrast */
