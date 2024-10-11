@@ -6,25 +6,51 @@
     <title>Login</title>
     <link rel="stylesheet" href="/static/styles.css">  <!-- Link to your CSS file -->
     <style>
-        
+        /* Reset margin and padding to remove unwanted white lines */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            box-sizing: border-box;
+        }
 
-        /* Additional styles for the form */
+        /* Base styles */
+        body {
+            background-color: #000000; /* Black background */
+            font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Consistent font */
+            color: #333; /* Dark text */
+            padding: 20px; /* Padding around the body */
+        }
+
         #login-form {
-            max-width: 400px; /* Optional: limit the form width */
+            max-width: 400px; /* Limit form width */
             margin: 20px auto; /* Center the form on the page */
-            padding: 20px; /* Add some padding */
-            border: 1px solid #ccc; /* Optional: add a border */
-            border-radius: 5px; /* Optional: add rounded corners */
-            background-color: #f9f9f9; /* Optional: light background color */
+            padding: 20px; /* Add padding */
+            border-radius: 8px; /* Rounded corners */
+            background-color: #ffffff; /* White background for the form */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
         }
 
         .form-label {
             display: block; /* Display labels as block elements */
-            margin: 10px 0 5px; /* Add some margin */
+            margin: 10px 0 5px; /* Add margin */
+        }
+
+        /* Styling input fields for consistency */
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%; /* Full width inputs */
+            padding: 10px; /* Padding for inputs */
+            margin-bottom: 15px; /* Space below inputs */
+            border: 1px solid #ccc; /* Border for inputs */
+            border-radius: 5px; /* Rounded corners */
+            box-sizing: border-box; /* Include padding in width */
+            text-align: center; /* Center text inside input */
         }
 
         button {
-            margin-top: 15px; /* Add some space above the button */
+            margin-top: 15px; /* Add space above the button */
             background-color: #3498db; /* Button color */
             color: white; /* Button text color */
             border: none; /* Remove default border */
@@ -32,10 +58,17 @@
             border-radius: 5px; /* Rounded corners for button */
             cursor: pointer; /* Pointer cursor on hover */
             transition: background-color 0.3s; /* Smooth transition */
+            width: 100%; /* Full width for button */
         }
 
         button:hover {
             background-color: #2980b9; /* Darker blue on hover */
+        }
+
+        .show-password {
+            margin: 10px 0; /* Space above and below the checkbox */
+            display: flex; /* Flexbox for alignment */
+            align-items: center; /* Center checkbox and label */
         }
 
         .signup-prompt {
@@ -48,20 +81,30 @@
             text-align: center; /* Center flash messages */
         }
     </style>
+    <script>
+        // Function to toggle password visibility
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const passwordCheckbox = document.getElementById('showPassword');
+            passwordInput.type = passwordCheckbox.checked ? 'text' : 'password';
+        }
+    </script>
 </head>
 <body>
-    <header class="login-header">
-        <h1>Please Log In</h1>
-    </header>
-
-    <main>
+        <main>
         <form id="login-form" method="POST" action="/login">  <!-- Ensure action is set correctly -->
+            <h2>Login</h2>  <!-- This acts as the form title -->
             <label for="email" class="form-label">Email:</label>
             <input type="email" id="email" name="email" required>
-            <br>
+
             <label for="password" class="form-label">Password:</label>
             <input type="password" id="password" name="password" required>
-            <br>
+            
+            <div class="show-password">
+                <input type="checkbox" id="showPassword" onclick="togglePassword()">
+                <label for="showPassword">Show Password</label>
+            </div>
+
             <button type="submit">Login</button>
         </form>
 
@@ -78,8 +121,16 @@
         {% endwith %}
     </main>
 
-    <footer>
+    <footer style="padding: 20px; text-align: center; color: #fff; font-size: 18px; font-weight: bold;">
         <p>&copy; 2024 Bookstore. All rights reserved.</p>
     </footer>
+    
+
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="circle3"></div>
+    <div class="circle4"></div>
+    <div class="circle5"></div>
+    <div class="circle6"></div>
 </body>
 </html>

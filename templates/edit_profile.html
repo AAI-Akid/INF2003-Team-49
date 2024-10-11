@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        body {
+            background-color: #ecf0f1; /* Light gray background */
+            font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Consistent font */
+            color: #333; /* Dark text */
+            padding: 20px; /* Padding around the body */
+            display: flex; /* Flexbox for centering */
+            flex-direction: column; /* Stack children vertically */
+            align-items: center; /* Center horizontally */
+            min-height: 100vh; /* Full height for the body */
+            margin: 0; /* Reset margin */
+        }
+
+        h1 {
+            text-align: center; /* Center the heading */
+            color: #2c3e50; /* Darker color for contrast */
+            margin-bottom: 20px; /* Space below heading */
+            font-size: 2.5em; /* Larger font size */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+        }
+
+        form {
+            max-width: 400px; /* Limit form width */
+            width: 100%; /* Full width for responsiveness */
+            background-color: #fff; /* White background for the form */
+            padding: 30px; /* Padding inside the form */
+            border-radius: 12px; /* Slightly more rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for depth */
+            display: flex; /* Use flexbox for form layout */
+            flex-direction: column; /* Stack items vertically */
+            transition: transform 0.3s; /* Smooth transition */
+        }
+
+        form:hover {
+            transform: scale(1.02); /* Slightly scale up on hover */
+        }
+
+        label {
+            font-weight: bold; /* Bold labels */
+            margin-bottom: 5px; /* Space below labels */
+            display: block; /* Block display for labels */
+            color: #34495e; /* Darker color for labels */
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%; /* Full width inputs */
+            padding: 10px; /* Padding inside inputs */
+            margin: 5px 0 15px 0; /* Space below inputs */
+            border: 1px solid #ccc; /* Border for inputs */
+            border-radius: 5px; /* Rounded corners */
+            box-sizing: border-box; /* Include padding in width */
+            text-align: center; /* Center text inside input */
+            transition: border-color 0.3s; /* Smooth transition for border */
+        }
+
+        input:focus {
+            border-color: #3498db; /* Change border color on focus */
+            outline: none; /* Remove default outline */
+        }
+
+        button {
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            padding: 10px; /* Padding for the button */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer on hover */
+            font-size: 1em; /* Font size */
+            width: 100%; /* Full width button */
+            margin-top: 10px; /* Space above button */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        .show-password {
+            margin: 10px 0; /* Space above and below the checkbox */
+            display: flex; /* Use flexbox for alignment */
+            align-items: center; /* Center checkbox and label vertically */
+            justify-content: flex-start; /* Align items to the start */
+        }
+
+        .show-password input {
+            margin-right: 10px; /* Space between checkbox and label */
+        }
+
+
+        a {
+            display: inline-block; /* Inline block for link */
+            margin-top: 20px; /* Space above the link */
+            text-align: center; /* Center text */
+            color: #3498db; /* Blue link color */
+            text-decoration: none; /* No underline */
+            font-weight: bold; /* Bold link */
+            transition: color 0.3s; /* Smooth transition */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+            color: #2980b9; /* Darker blue on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            form {
+                padding: 20px; /* Reduce padding on smaller screens */
+            }
+
+            h1 {
+                font-size: 2em; /* Smaller heading on mobile */
+            }
+        }
+    </style>
+    <script>
+        // Function to toggle password visibility
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const passwordCheckbox = document.getElementById('showPassword');
+            passwordInput.type = passwordCheckbox.checked ? 'text' : 'password';
+        }
+    </script>
+</head>
+<body>
+    <h1>Edit Profile</h1>
+    <form method="POST">
+        <label>Username:</label>
+        <input type="text" name="username" value="{{ user.username }}" disabled>
+
+        <label>Email:</label>
+        <input type="email" name="email" value="{{ user.email }}" required>
+
+        <label>Password:</label>
+        <input type="password" id="password" name="password" placeholder="Leave blank if not changing">
+        
+        <div class="show-password">
+            <input type="checkbox" id="showPassword" onclick="togglePassword()">
+            <label for="showPassword">Show Password</label>
+        </div>
+
+        <label>Address:</label>
+        <input type="text" name="address" value="{{ user.address }}" required>
+
+        <button type="submit">Update</button>
+    </form>
+
+    <a href="/dashboard">Back to Store</a>
+</body>
+</html>

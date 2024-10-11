@@ -107,6 +107,7 @@
             <h2 class="brand-name">BookSearch.com</h2>
             <div class="header-buttons">
                 <span class="logged-in">Logged In</span> <!-- Unclickable logged in button -->
+                <a href="/user_profile">View Profile</a><!-- View profile -->
                 <a href="/cart">View Cart</a> <!-- Added View Cart link -->
                 <a href="/logout">Logout</a> <!-- Option to logout -->
             </div>
@@ -114,7 +115,7 @@
     </header>
 
     <main>
-        <h1>Welcome back, {{ user.username }}!</h1>
+        <h1>Welcome back, {{ users.username }}!</h1>
         <p class="explore-books">Explore our collection of books!</p>
         <div class="book-grid">
             {% for book in books %}

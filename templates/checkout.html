@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        body {
+            background-color: #f4f4f4; /* Light gray background */
+            font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Consistent font */
+            color: #333; /* Dark text */
+            padding: 20px; /* Padding around the body */
+            display: flex; /* Flexbox for centering */
+            flex-direction: column; /* Stack children vertically */
+            align-items: center; /* Center horizontally */
+        }
+
+        /* Main heading styling */
+        h1 {
+            font-size: 3em;
+            color: #2c3e50; /* Darker color for contrast */
+            margin-bottom: 20px; /* Space below heading */
+            text-align: center; /* Center the heading */
+        }
+
+        /* Form container styling */
+        .checkout-form {
+            background-color: #fff; /* White background for the form */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            padding: 30px; /* Increased padding inside the form */
+            max-width: 600px; /* Max width for form */
+            width: 100%; /* Full width for responsiveness */
+            margin: 0 auto; /* Center the form */
+        }
+
+        /* Input fields styling */
+        .form-group {
+            margin-bottom: 20px; /* Increased space between input fields */
+        }
+
+        label {
+            display: block; /* Block display for labels */
+            margin-bottom: 5px; /* Space below label */
+            font-weight: bold; /* Bold text for labels */
+            color: #555; /* Slightly darker color for labels */
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"], input[type="number"] {
+            width: 100%; /* Full width inputs */
+            max-width: 400px; /* Set a maximum width for uniformity */
+            padding: 12px; /* Increased padding inside inputs */
+            height: 44px; /* Set a uniform height for all input fields */
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 4px; /* Rounded corners */
+            font-size: 1em; /* Font size */
+            transition: border-color 0.3s; /* Smooth border color transition */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="number"]:focus {
+            border-color: #3498db; /* Highlight border on focus */
+            outline: none; /* Remove default outline */
+        }
+
+        /* Checkout button styling */
+        .checkout-button {
+            display: block; /* Make it a block to center */
+            width: 100%; /* Full width for the button */
+            max-width: 400px; /* Set max width for button */
+            padding: 12px; /* Padding for the button */
+            margin-top: 20px; /* Space above button */
+            text-align: center; /* Center text inside */
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 1.2em; /* Font size */
+            cursor: pointer; /* Pointer on hover */
+            text-decoration: none; /* No underline */
+            transition: background-color 0.3s; /* Smooth transition for hover effect */
+        }
+
+        /* Button hover effect */
+        .checkout-button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        /* Link to return to cart */
+        .return-to-cart {
+            margin-top: 20px; /* Space above link */
+            text-decoration: none; /* No underline */
+            color: #3498db; /* Blue color */
+            font-size: 1em; /* Font size */
+            text-align: center; /* Center text */
+        }
+
+        .return-to-cart:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <div class="checkout-form">
+        <form action="/process_checkout" method="POST">
+            <div class="form-group">
+                <label for="full-name">Full Name</label>
+                <input type="text" id="full-name" name="full_name" required placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="example@example.com" value="{{ email }}">
+            </div>
+            <div class="form-group">
+                <label for="address">Shipping Address</label>
+                <input type="text" id="address" name="address" required placeholder="123 Main St, City, Country" value="{{ address }}">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required placeholder="+1 234 567 8900">
+            </div>
+            <div class="form-group">
+                <label for="card-number">Credit Card Number</label>
+                <input type="number" id="card-number" name="card_number" required placeholder="4111 1111 1111 1111">
+            </div>
+            <div class="form-group">
+                <label for="expiry-date">Expiry Date (MM/YY)</label>
+                <input type="text" id="expiry-date" name="expiry_date" required placeholder="MM/YY">
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="number" id="cvv" name="cvv" required placeholder="123">
+            </div>
+            <button type="submit" class="checkout-button">Complete Purchase</button>
+        </form>
+        <a href="/cart" class="return-to-cart">Return to Cart</a>
+    </div>
+</body>
+</html>
