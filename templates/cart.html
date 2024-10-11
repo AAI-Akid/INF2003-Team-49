@@ -3,111 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
+    <title>Your Cart</title>
     <link rel="stylesheet" href="/static/styles.css">
     <style>
-        .logged-in {
-            padding: 10px 20px; /* Add padding for the 'Logged In' box */
-            background-color: white; /* White background */
-            color: #333; /* Text color */
-            border: 2px solid #ffffff; /* Optional: border color */
+        /* Main heading styling */
+        h1 {
+            font-size: 3em; /* Heading size */
+            color: #ffffff; /* White color for the heading */
+            margin-bottom: 20px; /* Spacing below the heading */
+            font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Consistent font */
+        }
+
+        /* Cart item list styling */
+        ul {
+            list-style-type: none; /* Remove default list styling */
+            padding: 0; /* No padding */
+            max-width: 600px; /* Limit the width of the cart */
+            margin: 0 auto; /* Center the list */
+        }
+
+        /* Individual cart item styling */
+        li {
+            background-color: #ecf0f1; /* Light gray background for items */
+            padding: 15px; /* Padding for each item */
+            margin: 10px 0; /* Space between items */
             border-radius: 5px; /* Rounded corners */
-            font-size: 18px; /* Make the text bigger */
-            margin-right: 10px; /* Space between buttons */
-            display: inline-block; /* Make it behave like a button */
-            cursor: default; /* Change cursor to default */
-        }
-
-        .header-buttons a {
-            text-decoration: none; /* Remove underline from link */
-            padding: 10px 20px; /* Add padding for the logout link */
-            background-color: #000000; /* Button background color */
-            color: white; /* Button text color */
-            border-radius: 5px; /* Rounded button corners */
-            margin-left: 10px; /* Space between buttons */
-            display: flex; /* Use flexbox for centering */
+            display: flex; /* Flexbox layout */
+            justify-content: space-between; /* Space between item details and price */
             align-items: center; /* Center items vertically */
-            justify-content: center; /* Center items horizontally */
+            color: #333; /* Dark text for visibility */
         }
 
-        .book-item {
-            margin-bottom: 10px; /* Space between book items */
-        }
-
-        .add-to-cart button {
-            background-color: #007bff; /* Button background color */
-            color: white; /* Button text color */
-            padding: 5px 10px; /* Button padding */
-            border-radius: 5px; /* Rounded button corners */
-            border: none;
-            cursor: pointer; /* Pointer on hover */
-        }
-
-        .add-to-cart button:hover {
-            background-color: #0056b3; /* Darker on hover */
-        }
-
-        .book-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 columns */
-            gap: 20px; /* Spacing between items */
-        }
-
-        .book-item {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .book-item img {
-            max-width: 100%; /* Ensure images are responsive */
-            height: auto; /* Maintain aspect ratio */
-        }
+        
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <div class="logo">
-                <img src="/static/books/books.png" alt="Bookstore Logo">
-            </div>
-            <h2 class="brand-name">BookSearch.com</h2>
-            <div class="header-buttons">
-                <span class="logged-in">Logged In</span> <!-- Unclickable logged in button -->
-                <a href="/cart">View Cart</a> <!-- Added View Cart link -->
-                <a href="/logout">Logout</a> <!-- Option to logout -->
-            </div>
-        </div>
-    </header>
+    <h1>Your Cart</h1>
+    <ul>
+        {% if cart_items | length == 0 %}
 
-    <main>
-        <h1>Welcome back, {{ user.username }}!</h1>
-        <p class="explore-books">Explore our collection of books!</p>
-        <div class="book-grid">
-            {% for book in books %}
-            <div class="book-item">
-                <a href="{{ url_for('book_detail', book_id=book.book_id) }}">
-                    <img src="{{ url_for('static', filename='images/books/' + book.cover_image) }}" alt="{{ book.title }} cover">
-                    <h2>{{ book.title }}</h2>
-                    <p>Price: ${{ book.price }} USD</p>
-                    <p>Rating: {{ book.rating }}</p>
-                </a>
-                
-                <!-- Add to Cart button -->
-                <form action="{{ url_for('add_to_cart') }}" method="POST" class="add-to-cart">
-                    <input type="hidden" name="book_id" value="{{ book.book_id }}">
-                    <button type="submit">Add to Cart</button>
-                </form>
-            </div>
+            <li>Cart is empty!</li>
+        {% else %}
+            {% for book in cart_items %}
+            <li>
+                <span>{{ book.title }} by {{ book.author }}</span>
+                <span>${{ book.price }}</span>
+            </li>
             {% endfor %}
-        </div>
-    </main>
+        {% endif %}
+    </ul>
 
-    <div class="circle1"></div>
-    <div class="circle2"></div>
-    <div class="circle3"></div>
-    <div class="circle4"></div>
-    <div class="circle5"></div>
-    <div class="circle6"></div>
+    <a href="/clear_cart" class="clear-cart-button">Clear Cart</a> <!-- Clear Cart Button -->
+    <a href="/dashboard" class="continue-shopping">Continue Shopping</a> <!-- Continue Shopping Button -->
 </body>
 </html>

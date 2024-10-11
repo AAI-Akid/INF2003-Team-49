@@ -4,31 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Book</title>
-    <link rel="stylesheet" href="/static/styles.css"> <!-- Link to your main CSS file -->
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        /* Specific styles for the form page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form input[type="text"], 
+        form input[type="number"], 
+        form input[type="file"], 
+        form input[type="date"],
+        form textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        form button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        .cancel-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .cancel-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Edit Book</h1>
-    </header>
-
     <div class="container">
+        <h1>Edit Book</h1>
+
         <form action="{{ url_for('edit_book', book_id=book.book_id) }}" method="POST" enctype="multipart/form-data">
-            <input type="text" name="title" placeholder="Book Title" value="{{ book.title }}" required>
-            <input type="text" name="author" placeholder="Author" value="{{ book.author }}" required>
-            <input type="number" name="rating" placeholder="Rating" value="{{ book.rating }}" required step="0.1" min="0" max="5">
-            <input type="number" name="price" placeholder="Price" value="{{ book.price }}" required step="0.01">
-            <input type="text" name="currency" placeholder="Currency (e.g., USD)" value="{{ book.currency }}" required>
-            <input type="text" name="description" placeholder="Description" value="{{ book.description }}" required>
-            <input type="text" name="publisher" placeholder="Publisher" value="{{ book.publisher }}" required>
-            <input type="number" name="page_count" placeholder="Page Count" value="{{ book.page_count }}" required>
-            <input type="text" name="genres" placeholder="Genres (comma-separated)" value="{{ book.genres }}" required>
-            <input type="text" name="isbn" placeholder="ISBN" value="{{ book.isbn }}" required>
-            <input type="text" name="language" placeholder="Language" value="{{ book.language }}" required>
-            <input type="date" name="published_date" value="{{ book.published_date }}" required>
+            <input type="text" name="title" placeholder="Book Title" value="{{ book.title }}">
+            <input type="text" name="author" placeholder="Author" value="{{ book.author }}">
+            <input type="number" name="rating" placeholder="Rating" value="{{ book.rating }}" step="0.1" min="0" max="5">
+            <input type="number" name="price" placeholder="Price" value="{{ book.price }}" step="0.01">
+            <input type="text" name="currency" placeholder="Currency (e.g., USD)" value="{{ book.currency }}">
+            <textarea name="description" placeholder="Description">{{ book.description }}</textarea>
+            <input type="text" name="publisher" placeholder="Publisher" value="{{ book.publisher }}">
+            <input type="number" name="page_count" placeholder="Page Count" value="{{ book.page_count }}">
+            <input type="text" name="genres" placeholder="Genres (comma-separated)" value="{{ book.genres }}">
+            <input type="text" name="isbn" placeholder="ISBN" value="{{ book.isbn }}">
+            <input type="text" name="language" placeholder="Language" value="{{ book.language }}">
+            <input type="date" name="published_date" value="{{ book.published_date }}">
             <input type="file" name="cover_image" accept="image/jpeg, image/png, image/jpg">
             <button type="submit">Update Book</button>
         </form>
-        <a href="{{ url_for('admin_dashboard') }}">Cancel</a> <!-- Link to go back to admin dashboard -->
+
+        <a href="{{ url_for('admin') }}" class="cancel-btn">Cancel</a>
     </div>
 </body>
 </html>
+

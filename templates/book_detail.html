@@ -1,17 +1,128 @@
-<form action="{{ url_for('update_book', book_id=book[0]) }}" method="POST" enctype="multipart/form-data">
-    <input type="text" name="title" placeholder="Book Title" value="{{ book[1] }}" required>
-    <input type="text" name="author" placeholder="Author" value="{{ book[2] }}" required>
-    <input type="number" name="rating" placeholder="Rating" value="{{ book[3] }}" required step="0.1" min="0" max="5">
-    <input type="number" name="price" placeholder="Price" value="{{ book[4] }}" required step="0.01">
-    <input type="text" name="currency" placeholder="Currency (e.g., USD)" value="{{ book[5] }}" required>
-    <input type="text" name="description" placeholder="Description" value="{{ book[6] }}" required>
-    <input type="text" name="publisher" placeholder="Publisher" value="{{ book[7] }}" required>
-    <input type="number" name="page_count" placeholder="Page Count" value="{{ book[8] }}" required>
-    <input type="text" name="genres" placeholder="Genres (comma-separated)" value="{{ book[9] }}" required>
-    <input type="text" name="isbn" placeholder="ISBN" value="{{ book[10] }}" required>
-    <input type="text" name="language" placeholder="Language" value="{{ book[11] }}" required>
-    <input type="date" name="published_date" value="{{ book[12] }}" required>
-    <input type="file" name="cover_image" accept="image/jpeg, image/png, image/jpg">
-    <button type="submit">Update Book</button>
-</form>
-<a href="{{ url_for('admin') }}">Cancel</a> <!-- Link to go back to admin page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>{{ book.title }}</title>
+    <style>
+        .container {
+            max-width: 1000px;
+            margin: 70px auto;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff; /* Background color for the card */
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .book-details {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .book-image {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .book-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .book-info {
+            flex: 2;
+        }
+
+        .book-info h2 {
+            color: #555;
+        }
+
+        .book-info p {
+            margin: 8px 0;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically */
+            align-items: center; /* Center buttons horizontally */
+            margin-top: 20px; /* Space above buttons */
+        }
+
+        .add-to-cart-btn, .back-btn {
+            width: 200px; /* Set a fixed width for both buttons */
+            text-align: center; /* Center text inside buttons */
+            padding: 10px 15px; /* Consistent padding */
+            border-radius: 4px; /* Consistent border radius */
+            box-shadow: none; /* Remove any default box shadow */
+            outline: none; /* Remove focus outline */
+        }
+
+        .add-to-cart-btn {
+            background-color: #007bff;
+            color: white;
+            border: none; /* Remove border */
+            cursor: pointer;
+            margin-bottom: 10px; /* Space between buttons */
+        }
+
+        .add-to-cart form {
+            border: none; /* No border */
+            margin: 0; /* Remove margin */
+            padding: 0; /* Remove padding */
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+
+        .back-btn {
+            background-color: #007bff; /* Same color as Add to Cart */
+            color: white;
+            text-decoration: none;
+            border: none; /* Remove border */
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ book.title }}</h1>
+        <div class="book-details">
+            <div class="book-image">
+                <img src="{{ url_for('static', filename='images/books/' + book.cover_image) }}" alt="{{ book.title }} cover">
+            </div>
+            <div class="book-info">
+                <h2>Author: {{ book.author }}</h2>
+                <p><strong>Language:</strong> {{ book.language }}</p>
+                <p><strong>Price:</strong> {{ book.price }} {{ book.currency }}</p>
+                <p><strong>Rating:</strong> {{ book.rating }}</p>
+                <p><strong>Description:</strong> {{ book.description }}</p>
+                <p><strong>Publisher:</strong> {{ book.publisher }}</p>
+                <p><strong>Published Date:</strong> {{ book.published_date }}</p>
+                <p><strong>Page Count:</strong> {{ book.page_count }}</p>
+                <p><strong>ISBN:</strong> {{ book.ISBN }}</p>
+                <p><strong>Genres:</strong> {{ book.generes }}</p>
+            </div>
+        </div>
+        <div class="button-container">
+            <form action="{{ url_for('add_to_cart', book_id=book.book_id) }}" method="POST">
+                <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+            </form>            
+            </form>
+            <a href="{{ url_for('dashboard') }}" class="back-btn">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

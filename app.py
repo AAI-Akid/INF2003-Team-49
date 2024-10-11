@@ -111,72 +111,70 @@ def add_book():
         return redirect(url_for('admin'))
 
 
+# Fetch book by ID
+def get_book_by_id(book_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute('SELECT * FROM books WHERE book_id = %s', (book_id,))
+    book = cursor.fetchone()
+    conn.close()
+    return book
+
+# Update book details
+def update_book(book_id, title, author, price):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        'UPDATE books SET title = %s, author = %s, price = %s WHERE book_id = %s',
+        (title, author, price, book_id)
+    )
+    conn.commit()
+    conn.close()
+
 # Admin route to edit an existing book
 @app.route('/admin/edit_book/<int:book_id>', methods=['GET', 'POST'])
 def edit_book(book_id):
     if 'user_id' not in session or session.get('role') != 'admin':
         return redirect(url_for('login_page'))  # Redirect if not admin
 
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    
+    # Fetch the current book data to populate the form (GET request)
+    book = get_book_by_id(book_id)
+
+    if request.method == 'GET':
+        return render_template('edit_book.html', book=book)
+
+    # Handle form submission (POST request)
     if request.method == 'POST':
-        title = request.form['title']
-        author = request.form['author']
-        rating = request.form['rating']
-        price = request.form['price']
-        currency = request.form['currency']
-        description = request.form['description']
-        publisher = request.form['publisher']
-        page_count = request.form['page_count']
-        genres = request.form['genres']
-        isbn = request.form['isbn']
-        language = request.form['language']
-        published_date = request.form['published_date']
+        # Fetch the submitted form data
+        title = request.form.get('title') or book['title']  # If empty, use existing data
+        author = request.form.get('author') or book['author']
+        rating = request.form.get('rating') or book['rating']
+        price = request.form.get('price') or book['price']
+        currency = request.form.get('currency') or book['currency']
+        description = request.form.get('description') or book['description']
+        publisher = request.form.get('publisher') or book['publisher']
+        page_count = request.form.get('page_count') or book['page_count']
+        genres = request.form.get('genres') or book['genres']
+        isbn = request.form.get('isbn') or book['isbn']
+        language = request.form.get('language') or book['language']
+        published_date = request.form.get('published_date') or book['published_date']
 
-        if not title or not author or not price:
-            flash('All fields are required!')
-            return redirect(url_for('admin'))  # Change this if necessary
+        # Handle file upload if an image is submitted
+        cover_image = request.files.get('cover_image')
+        if cover_image:
+            # Save the image and store its filename in the database
+            cover_image_filename = secure_filename(cover_image.filename)
+            cover_image.save(os.path.join(app.config['UPLOAD_FOLDER'], cover_image_filename))
+        else:
+            cover_image_filename = book['cover_image']  # Use existing image if no new one is uploaded
 
-        cursor.execute('''UPDATE books
-                          SET title = %s, author = %s, rating = %s, price = %s, currency = %s,
-                              description = %s, publisher = %s, page_count = %s,
-                              genres = %s, isbn = %s, language = %s, published_date = %s
-                          WHERE book_id = %s''', 
-                       (title, author, rating, price, currency, description, publisher, 
-                        page_count, genres, isbn, language, published_date, book_id))
-        conn.commit()
+        # Update the book with the new or unchanged values
+        update_book(book_id, title, author, rating, price, currency, description, publisher, page_count, genres, isbn, language, published_date, cover_image_filename)
+
         flash('Book updated successfully!')
-        return redirect(url_for('admin'))  # Redirect to admin dashboard
+        return redirect(url_for('admin'))
 
-    # If the method is GET, fetch the book information
-    cursor.execute('SELECT * FROM books WHERE book_id = %s', (book_id,))
-    book = cursor.fetchone()  # This returns a tuple
-    
-    if book is None:
-        flash('Book not found!')
-        return redirect(url_for('admin'))  # Redirect if the book doesn't exist
-    
-    # Convert the tuple to a dictionary for easy attribute access
-    book_dict = {
-        'book_id': book[0],        # Assuming book_id is the first column
-        'title': book[1],
-        'author': book[2],
-        'rating': book[3],
-        'price': book[4],
-        'currency': book[5],
-        'description': book[6],
-        'publisher': book[7],
-        'page_count': book[8],
-        'genres': book[9],
-        'isbn': book[10],
-        'language': book[11],
-        'published_date': book[12]
-    }
 
-    conn.close()
-    
-    return render_template('edit_book.html', book=book_dict)
 
 
 
