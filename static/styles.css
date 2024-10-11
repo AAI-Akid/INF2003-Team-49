@@ -40,7 +40,7 @@ header {
     font-size: 2.5em; /* Adjust size as needed */
     color: #006199; /* Dark blue color for visibility */
     position: absolute; /* Position the brand name absolutely */
-    left: 1100px; /* Adjust this value to move left/right */
+    left: 950px; /* Adjust this value to move left/right */
     top: -8px; /* Adjust this value to move up/down */
     text-align: left; /* or right, based on preference */
 }
@@ -103,23 +103,6 @@ ul {
     flex: 1; /* Allow details to grow */
     text-align: left; /* Align text to the left */
     font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
-}
-
-.add-to-cart {
-    margin-left: 15px; /* Space between details and button */
-}
-
-.add-to-cart a {
-    color: #fff;
-    text-decoration: none;
-    background-color: #3498db; /* Button background color */
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.add-to-cart a:hover {
-    background-color: #2980b9;
 }
 
 /* List item strong styling */
@@ -330,7 +313,7 @@ h1 {
     color: rgb(255, 255, 255); /* Change header text color to white */
     margin-top: 100px; /* Add some space above the header */
     margin-bottom: 20px; /* Optional: Add some space below the header */
-    padding-right: 1110px; /* Add some padding to the right for spacing */
+    padding-right: 1000px; /* Add some padding to the right for spacing */
     background-color: transparent; /* Ensure the background is transparent */
 }
 
@@ -353,19 +336,4 @@ h1 {
     line-height: 1.5; /* Improve line height for readability */
 }
 
-.add-to-cart {
-    margin-top: 10px; /* Space above the button */
-}
-
-.add-to-cart a {
-    background-color: #4CAF50; /* Green background */
-    color: white; /* White text */
-    padding: 10px 15px; /* Padding for the button */
-    text-decoration: none; /* Remove underline */
-    border-radius: 5px; /* Rounded corners for the button */
-}
-
-.add-to-cart a:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
 

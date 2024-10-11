@@ -1,17 +1,17 @@
-<main>
-    <h1>{{ book.title }}</h1>
-    <img src="{{ book.cover_image }}" alt="{{ book.title }} cover">
-    <p><strong>Author:</strong> {{ book.author }}</p>
-    <p><strong>Price:</strong> ${{ book.price }}</p>
-    <p><strong>Rating:</strong> {{ book.rating }}</p>
-    <p><strong>Description:</strong> {{ book.description }}</p>
-    <p><strong>Publisher:</strong> {{ book.publisher }}</p>
-    <p><strong>Page Count:</strong> {{ book.page_count }}</p>
-    <p><strong>Genres:</strong> {{ book.generes }}</p>
-    <p><strong>ISBN:</strong> {{ book.ISBN }}</p>
-    <p><strong>Language:</strong> {{ book.language }}</p>
-    <p><strong>Published Date:</strong> {{ book.published_date }}</p>
-    <div class="add-to-cart">
-        <a href="{{ url_for('add_to_cart', book_id=book.book_id) }}">Add to Cart</a>
-    </div>
-</main>
+<form action="{{ url_for('update_book', book_id=book[0]) }}" method="POST" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="Book Title" value="{{ book[1] }}" required>
+    <input type="text" name="author" placeholder="Author" value="{{ book[2] }}" required>
+    <input type="number" name="rating" placeholder="Rating" value="{{ book[3] }}" required step="0.1" min="0" max="5">
+    <input type="number" name="price" placeholder="Price" value="{{ book[4] }}" required step="0.01">
+    <input type="text" name="currency" placeholder="Currency (e.g., USD)" value="{{ book[5] }}" required>
+    <input type="text" name="description" placeholder="Description" value="{{ book[6] }}" required>
+    <input type="text" name="publisher" placeholder="Publisher" value="{{ book[7] }}" required>
+    <input type="number" name="page_count" placeholder="Page Count" value="{{ book[8] }}" required>
+    <input type="text" name="genres" placeholder="Genres (comma-separated)" value="{{ book[9] }}" required>
+    <input type="text" name="isbn" placeholder="ISBN" value="{{ book[10] }}" required>
+    <input type="text" name="language" placeholder="Language" value="{{ book[11] }}" required>
+    <input type="date" name="published_date" value="{{ book[12] }}" required>
+    <input type="file" name="cover_image" accept="image/jpeg, image/png, image/jpg">
+    <button type="submit">Update Book</button>
+</form>
+<a href="{{ url_for('admin') }}">Cancel</a> <!-- Link to go back to admin page -->

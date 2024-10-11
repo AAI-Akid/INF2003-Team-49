@@ -30,34 +30,60 @@
             justify-content: center; /* Center items horizontally */
         }
 
-        .book-item {
-            margin-bottom: 10px; /* Space between book items */
-        }
-
-        .add-to-cart a {
-            background-color: #007bff; /* Button background color */
-            color: white; /* Button text color */
-            padding: 5px 10px; /* Button padding */
-            border-radius: 5px; /* Rounded button corners */
-            text-decoration: none; /* Remove underline from link */
-        }
-
         .book-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 columns */
-            gap: 20px; /* Spacing between items */
+            grid-template-columns: repeat(4, 1fr); /* 4 columns */
+            gap: 100px; /* Spacing between items */
         }
 
         .book-item {
             border: 1px solid #ccc;
             padding: 10px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
         }
 
         .book-item img {
             max-width: 100%; /* Ensure images are responsive */
             height: auto; /* Maintain aspect ratio */
         }
+
+        .book-info {
+            margin-bottom: 20px; /* Reduced for closer spacing */
+        }
+
+        .book-info p, h2 {
+            margin: 5px 0; /* Standardize spacing between title, price, and rating */
+        }
+
+        .add-to-cart {
+            margin-top: -30px; /* Push the button to the bottom */
+        }
+
+        .add-to-cart button {
+            background-color: #007bff; /* Button background color */
+            color: white; /* Button text color */
+            padding: 5px 10px; /* Button padding */
+            border-radius: 5px; /* Rounded button corners */
+            border: none; /* No border */
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        .add-to-cart form {
+            border: none; /* No border */
+            margin: 0; /* Remove margin */
+            padding: 0; /* Remove padding */
+        }
+
+        .add-to-cart button {
+            border: none; /* Remove border */
+            outline: none; /* Remove outline */
+            box-shadow: none; /* Remove any shadow that might look like a border */
+        }
+
     </style>
 </head>
 <body>
@@ -81,14 +107,21 @@
         <div class="book-grid">
             {% for book in books %}
             <div class="book-item">
-                <a href="{{ url_for('book_detail', book_id=book.book_id) }}">
-                    <!-- Corrected image path -->
-                    <img src="{{ url_for('static', filename='images/books/' + book.cover_image) }}" alt="{{ book.title }} cover">
-                    
-                    <h2>{{ book.title }}</h2>
-                    <p>Price: ${{ book.price }} USD</p>
-                    <p>Rating: {{ book.rating }}</p>
-                </a>
+                <!-- Book information block -->
+                <div class="book-info">
+                    <a href="{{ url_for('book_detail', book_id=book.book_id) }}">
+                        <img src="{{ url_for('static', filename='images/books/' + book.cover_image) }}" alt="{{ book.title }} cover">
+                        <h2>{{ book.title }}</h2>
+                        <p>Price: ${{ book.price }} USD</p>
+                        <p>Rating: {{ book.rating }}</p>
+                    </a>
+                </div>
+                <!-- Add to Cart button -->
+                <div class="add-to-cart">
+                    <form action="{{ url_for('add_to_cart', book_id=book.book_id) }}" method="POST">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
             </div>
             {% endfor %}
         </div>
