@@ -15,7 +15,7 @@ def get_db_connection():
     return mysql.connector.connect(
         host='localhost',
         user='root',  # Your MySQL username
-        password='NiSSanr34!',  # Your MySQL password
+        password='Strikefreedom27!',  # Your MySQL password
         database='bookstore',
         port=3306  # default is 3306
     )
@@ -483,6 +483,14 @@ def checkout():
     # Fetch user data from the database
     cursor.execute('SELECT email, address FROM users WHERE user_id = %s', (session['user_id'],))
     user_data = cursor.fetchone()
+
+    # Fetch cart items for the user
+    cursor.execute('''SELECT ci.*, b.title, b.price FROM cart_items ci
+                      JOIN books b ON ci.book_id = b.book_id
+                      WHERE ci.user_id = %s''', (session['user_id'],))
+    cart_items = cursor.fetchall()
+    total_price = sum(item['price'] for item in cart_items)  # Calculate total price
+
     conn.close()
 
     # If user data is found, extract email and address
@@ -495,7 +503,10 @@ def checkout():
         flash('Checkout successful!')  # Replace with actual checkout logic
         return redirect(url_for('index'))  # Redirect after successful checkout
 
-    return render_template('checkout.html', email=email, address=address)
+    return render_template('checkout.html', email=email, address=address, cart_items=cart_items, total_price=total_price)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
