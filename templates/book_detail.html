@@ -57,7 +57,7 @@
             margin-top: 20px; /* Space above buttons */
         }
 
-        .add-to-cart-btn, .back-btn {
+        .add-to-carts-btn, .back-btn {
             width: 200px; /* Set a fixed width for both buttons */
             text-align: center; /* Center text inside buttons */
             padding: 10px 15px; /* Consistent padding */
@@ -66,7 +66,7 @@
             outline: none; /* Remove focus outline */
         }
 
-        .add-to-cart-btn {
+        .add-to-carts-btn {
             background-color: #007bff;
             color: white;
             border: none; /* Remove border */
@@ -74,13 +74,9 @@
             margin-bottom: 10px; /* Space between buttons */
         }
 
-        .add-to-cart form {
-            border: none; /* No border */
-            margin: 0; /* Remove margin */
-            padding: 0; /* Remove padding */
-        }
+    
 
-        .add-to-cart-btn:hover {
+        .add-to-carts-btn:hover {
             background-color: #0056b3; /* Darker shade on hover */
         }
 
@@ -118,7 +114,7 @@
         </div>
         <div class="button-container">
             <form action="{{ url_for('add_to_cart', book_id=book.book_id) }}" method="POST">
-                <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                <button type="submit" class="add-to-carts-btn">Add to Cart</button>
             </form>            
             </form>
             <a href="{{ url_for('dashboard') }}" class="back-btn">Back to Dashboard</a>
