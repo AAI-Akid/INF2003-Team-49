@@ -34,16 +34,7 @@ header {
     height: 50px; /* Adjust height as needed */
 }
 
-/* Brand name styling */
-.brand-name {
-    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
-    font-size: 2.5em; /* Adjust size as needed */
-    color: #006199; /* Dark blue color for visibility */
-    position: absolute; /* Position the brand name absolutely */
-    left: 950px; /* Adjust this value to move left/right */
-    top: -8px; /* Adjust this value to move up/down */
-    text-align: left; /* or right, based on preference */
-}
+
 
 /* Header buttons styling */
 .header-buttons {

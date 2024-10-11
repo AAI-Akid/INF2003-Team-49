@@ -79,17 +79,17 @@
         }
 
         table {
-            width: 200%; /* Full width table */
+            width: 90%; /* Adjust the width to 80% to make the table smaller */
             border-collapse: collapse; /* Collapse borders */
-            margin-top: 20px; /* Space above the table */
+            margin: 20px auto; /* Space above the table */
             table-layout: fixed; /* Ensure the table has a fixed layout */
         }
 
-        table th,
-        table td {
+        table th, table td {
             border: 1px solid #ddd; /* Light grey border for table cells */
             padding: 10px; /* Padding for table cells */
             text-align: left; /* Left align text */
+            word-wrap: break-word; /* Ensure text wraps within the cells */
         }
 
         
@@ -103,7 +103,8 @@
             background-color: #f2f2f2; /* Zebra stripe effect */
         }
 
-        .delete-button {
+        .delete-button,
+        .edit-button {
             background-color: #dc3545; /* Red background for delete button */
             color: white; /* Button text color */
             padding: 5px 10px; /* Button padding */
@@ -111,10 +112,29 @@
             border-radius: 5px; /* Rounded corners */
             cursor: pointer; /* Pointer cursor on hover */
             transition: background-color 0.3s; /* Smooth transition */
+            width: 100px; /* Set a fixed width for both buttons */
+            text-align: center; /* Center align text */
+            outline: none; /* Remove focus outline */
+            box-shadow: none; /* Remove any box shadow */
         }
+
+        .edit-button:focus,
+        .delete-button:focus {
+            outline: none; /* Remove focus outline */
+            box-shadow: none; /* Remove focus shadow */
+        }
+        .edit-button {
+            background-color: #18a006; /* Green background for edit button */
+        }
+
+        
 
         .delete-button:hover {
             background-color: #c82333; /* Darker red on hover */
+        }
+
+        .edit-button:hover {
+            background-color: #068602; /* Darker green on hover */
         }
         
         .table-container {
@@ -127,19 +147,38 @@
         }
 
         table td form {
-            display: flex; /* Use flexbox for alignment */
-            flex-direction: column; /* Stack buttons vertically */
-            align-items: center; /* Center the buttons */
+            display: inline-block; /* Keep buttons inline */
+            margin: 0; /* Remove margin around forms */
         }
 
         table td form button {
-            width: 200px; /* Set a fixed width for the buttons */
-            padding: 5px 10px; /* Adjust padding for smaller buttons */
-            font-size: 14px; /* Set font size */
-            margin: 20px 0; /* Space between buttons */
+            margin: 5px 0; /* Small margin for spacing */
             border: none; /* Remove border */
             outline: none; /* Remove outline */
             box-shadow: none; /* Remove any box shadow */
+            cursor: pointer; /* Pointer cursor for buttons */
+            width: auto; /* Ensure buttons fit content */
+        }
+
+        /* Description column specific styling */
+        table td.description {
+            max-width: 200px; /* Set a fixed width for the description column */
+            height: 100px; /* Set a fixed height for the description cell */
+            overflow-y: auto; /* Enable vertical scrolling */
+            overflow-x: hidden; /* Hide horizontal scrolling */
+            word-wrap: break-word; /* Ensure long words break to fit the width */
+            display: block; /* Make the cell behave like a block element for scrolling */
+            padding: 10px; /* Add padding inside the cell for spacing */
+        }
+
+        /* Customize the vertical scrollbar */
+        table td.description::-webkit-scrollbar {
+            width: 6px; /* Width of the vertical scrollbar */
+        }
+
+        table td.description::-webkit-scrollbar-thumb {
+            background-color: #007bff; /* Color of the scrollbar thumb */
+            border-radius: 10px; /* Rounded corners for the scrollbar thumb */
         }
 
         
@@ -212,17 +251,17 @@
                         <td>{{ book.rating }}</td>
                         <td>${{ book.price }}</td>
                         <td>{{ book.currency }}</td>
-                        <td>{{ book.description }}</td>
+                        <td class="description">{{ book.description }}</td>
                         <td>{{ book.publisher }}</td>
                         <td>{{ book.page_count }}</td>
-                        <td>{{ book.genres }}</td>
-                        <td>{{ book.isbn }}</td>
+                        <td>{{ book.generes }}</td>
+                        <td>{{ book.ISBN }}</td>
                         <td>{{ book.language }}</td>
                         <td>{{ book.published_date }}</td> <!-- Correctly place published date here -->
                         <td><img src="{{ url_for('static', filename='images/books/' + book.cover_image) }}" alt="{{ book.title }}" width="50"></td> <!-- Correctly place cover image here -->
                         <td>
                             <form action="{{ url_for('edit_book', book_id=book.book_id) }}" method="GET" style="display:inline;">
-                                <button type="submit">Edit</button>
+                                <button type="submit" class="edit-button">Edit</button>
                             </form>
                             <form action="{{ url_for('delete_book', book_id=book.book_id) }}" method="POST" style="display:inline;">
                                 <button type="submit" class="delete-button">Delete</button>

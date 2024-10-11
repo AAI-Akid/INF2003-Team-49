@@ -121,17 +121,23 @@ def get_book_by_id(book_id):
     return book
 
 # Update book details
-def update_book(book_id, title, author, price):
+def update_book(book_id, title, author, rating, price, currency, description, publisher, page_count, genres, isbn, language, published_date, cover_image_filename):
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute(
-        'UPDATE books SET title = %s, author = %s, price = %s WHERE book_id = %s',
-        (title, author, price, book_id)
+        '''
+        UPDATE books 
+        SET title = %s, author = %s, rating = %s, price = %s, currency = %s, description = %s, 
+        publisher = %s, page_count = %s, generes = %s, isbn = %s, language = %s, 
+        published_date = %s, cover_image = %s 
+        WHERE book_id = %s
+        ''',
+        (title, author, rating, price, currency, description, publisher, page_count, genres, isbn, language, published_date, cover_image_filename, book_id)
     )
     conn.commit()
     conn.close()
 
-# Admin route to edit an existing book
+
 @app.route('/admin/edit_book/<int:book_id>', methods=['GET', 'POST'])
 def edit_book(book_id):
     if 'user_id' not in session or session.get('role') != 'admin':
@@ -146,7 +152,7 @@ def edit_book(book_id):
     # Handle form submission (POST request)
     if request.method == 'POST':
         # Fetch the submitted form data
-        title = request.form.get('title') or book['title']  # If empty, use existing data
+        title = request.form.get('title') or book['title']
         author = request.form.get('author') or book['author']
         rating = request.form.get('rating') or book['rating']
         price = request.form.get('price') or book['price']
@@ -162,7 +168,6 @@ def edit_book(book_id):
         # Handle file upload if an image is submitted
         cover_image = request.files.get('cover_image')
         if cover_image:
-            # Save the image and store its filename in the database
             cover_image_filename = secure_filename(cover_image.filename)
             cover_image.save(os.path.join(app.config['UPLOAD_FOLDER'], cover_image_filename))
         else:
@@ -173,6 +178,7 @@ def edit_book(book_id):
 
         flash('Book updated successfully!')
         return redirect(url_for('admin'))
+
 
 
 
