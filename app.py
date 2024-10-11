@@ -15,7 +15,7 @@ def get_db_connection():
     return mysql.connector.connect(
         host='localhost',
         user='root',  # Your MySQL username
-        password='NiSSanr34!',  # Your MySQL password
+        password='Strikefreedom27!',  # Your MySQL password
         database='bookstore',
         port=3306  # default is 3306
     )
@@ -245,9 +245,10 @@ def view_cart():
                       WHERE ci.user_id = %s''', (session['user_id'],))
     
     cart_items = cursor.fetchall()
+    total_price = sum(book['price'] for book in cart_items)  # Use dictionary key
     conn.close()
     
-    return render_template('cart.html', cart_items=cart_items)
+    return render_template('cart.html', cart_items=cart_items, total_price=total_price)
 
 
 @app.route('/clear_cart')
@@ -269,6 +270,8 @@ def clear_cart():
     
     flash('Your cart has been cleared.')  # Optional: flash a message
     return redirect(url_for('view_cart'))  # Redirect to the cart page
+
+
 
 
 # Signup route
@@ -353,7 +356,7 @@ def dashboard():
 
     conn.close()
 
-    return render_template('dashboard.html', user=user, books=books)
+    return render_template('dashboard.html', users=user, books=books)
 
 @app.route('/book/<int:book_id>')
 def book_detail(book_id):
@@ -410,7 +413,7 @@ def logout():
 
 
 # User Profile route
-@app.route('/profile', methods=['GET', 'POST'])
+@app.route('/user_profile', methods=['GET', 'POST'])
 def profile():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
@@ -431,7 +434,62 @@ def profile():
     user = cursor.fetchone()
     conn.close()
 
-    return render_template('profile.html', user=user)
+    return render_template('user_profile.html', user=user)
+
+@app.route('/edit_profile', methods=['GET', 'POST'])
+def edit_profile():
+    conn = get_db_connection()  # Establish a new connection
+    cursor = conn.cursor(dictionary=True)
+
+    # Retrieve user info from the database
+    cursor.execute('SELECT * FROM users WHERE user_id = %s', (session['user_id'],))
+    user = cursor.fetchone()
+
+    if request.method == 'POST':
+        new_email = request.form['email']
+        new_address = request.form['address']
+        new_password = request.form['password']
+
+        # Prepare the query and parameters for the update
+        if new_password:  # Only hash and include the new password if it's provided
+            hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
+            cursor.execute('UPDATE users SET email = %s, password = %s, address = %s WHERE user_id = %s',
+                           (new_email, hashed_password, new_address, session['user_id']))
+        else:
+            cursor.execute('UPDATE users SET email = %s, address = %s WHERE user_id = %s',
+                           (new_email, new_address, session['user_id']))
+
+        conn.commit()
+        flash('Profile updated successfully')
+        return redirect(url_for('profile'))
+
+    conn.close()  # Close the database connection
+    return render_template('edit_profile.html', user=user)
+
+@app.route('/checkout', methods=['GET', 'POST'])
+def checkout():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))  # Redirect to login if not logged in
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    # Fetch user data from the database
+    cursor.execute('SELECT email, address FROM users WHERE user_id = %s', (session['user_id'],))
+    user_data = cursor.fetchone()
+    conn.close()
+
+    # If user data is found, extract email and address
+    email = user_data['email'] if user_data else ''
+    address = user_data['address'] if user_data else ''
+
+    if request.method == 'POST':
+        # Handle the checkout logic here (e.g., payment processing)
+        # You would typically process payment and create an order here
+        flash('Checkout successful!')  # Replace with actual checkout logic
+        return redirect(url_for('index'))  # Redirect after successful checkout
+
+    return render_template('checkout.html', email=email, address=address)
 
 if __name__ == '__main__':
     app.run(debug=True)
