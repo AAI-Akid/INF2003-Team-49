@@ -519,14 +519,11 @@ def remove_item():
         # Delete the item from the cart using cart_items.id
         cursor.execute('DELETE FROM cart_items WHERE user_id = %s AND id = %s', (session['user_id'], item_id))  # Use item_id
         conn.commit()
-
-        flash('Item removed from cart.')
     except mysql.connector.Error as err:
         print(f"Error: {err}")  # Log any error for debugging
     finally:
         cursor.close()
         conn.close()
-
     return redirect(url_for('view_cart'))  # Redirect back to the cart view
 
 
