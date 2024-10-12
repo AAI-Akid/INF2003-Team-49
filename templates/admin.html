@@ -64,7 +64,7 @@
         }
 
         /*changes the add new book container*/
-        form2 {
+        form {
             max-width: 600px; /* Limit form width */
             margin: 20px auto; /* Center the form */
             padding: 20px;
@@ -206,7 +206,7 @@
 
         <div class="book-form">
             <h2>Add New Book</h2>
-            <form2 action="{{ url_for('add_book') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url_for('add_book') }}" method="POST" enctype="multipart/form-data">
                 <input type="text" name="title" placeholder="Book Title" required>
                 <input type="text" name="author" placeholder="Author" required>
                 <input type="number" name="rating" placeholder="Rating" required step="0.1" min="0" max="5">
@@ -221,7 +221,7 @@
                 <input type="date" name="published_date" required>
                 <input type="file" name="cover_image" accept="image/jpeg, image/png, image/jpg" required>
                 <button type="submit">Add Book</button>
-            </form2>
+            </form>
         </div>
 
         <h2>Manage Books</h2>
