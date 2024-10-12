@@ -505,6 +505,36 @@ def checkout():
 
     return render_template('checkout.html', email=email, address=address, cart_items=cart_items, total_price=total_price)
 
+@app.route('/remove_item', methods=['POST'])
+def remove_item():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))  # Ensure the user is logged in
+
+    item_id = request.form['item_id']  # Get the item_id from the form
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+        # Delete the item from the cart using cart_items.id
+        cursor.execute('DELETE FROM cart_items WHERE user_id = %s AND id = %s', (session['user_id'], item_id))  # Use item_id
+        conn.commit()
+
+        flash('Item removed from cart.')
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")  # Log any error for debugging
+    finally:
+        cursor.close()
+        conn.close()
+
+    return redirect(url_for('view_cart'))  # Redirect back to the cart view
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

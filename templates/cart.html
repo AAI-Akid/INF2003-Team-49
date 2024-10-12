@@ -60,13 +60,30 @@
         .book-title {
             font-weight: bold; /* Bold text for title */
             font-size: 1.2em; /* Slightly larger font size */
+            margin-right: 20px; /* Space between title and price */
+            flex-grow: 1; /* Allow title to grow and take space */
         }
-
         /* Styling for book price */
         .book-price {
             font-weight: normal; /* Normal weight for price */
             font-size: 1em; /* Default font size for price */
             color: #2c3e50; /* Darker color for contrast */
+            margin-right: 20px; /* Space between price and button */
+        }
+
+        /* Styling for remove button */
+        .remove-button {
+            background-color: #ff0000; /* Red background for remove button */
+            color: white; /* White text */
+            border: none; /* No border */
+            padding: 5px 10px; /* Padding for the button */
+            cursor: pointer; /* Pointer on hover */
+            border-radius: 3px; /* Rounded corners */
+            font-size: 0.9em; /* Slightly smaller font size */
+        }
+
+        .remove-button:hover {
+            background-color: #e60000; /* Darker red on hover */
         }
 
         .total-price {
@@ -143,6 +160,11 @@
             <li>
                 <span class="book-title">{{ book['title'] }}</span>
                 <span class="book-price">${{ book['price'] }}</span>
+                <form action="{{ url_for('remove_item') }}" method="POST">
+                    <input type="hidden" name="item_id" value="{{ book.id }}">
+                    <button type="submit" class="remove-button">Remove</button>
+                </form>
+                
             </li>
             {% endfor %}
             <li class="total-price">
@@ -151,6 +173,8 @@
             </li>
         {% endif %}
     </ul>
+    
+    
 
     <div class="button-container">
         <a href="/clear_cart" class="clear-cart-button">Clear Cart</a>
