@@ -45,7 +45,7 @@ header {
     color: #fff;
     text-decoration: none;
     background-color: #000000; /* Button background color */
-    padding: 10px 15px;
+    padding: 12px 22px;
     border-radius: 5px;
     font-size: 1em;
     transition: background-color 0.3s;
@@ -53,6 +53,16 @@ header {
 
 .header-buttons a:hover {
     background-color: #2980b9;
+}
+
+/* Brand name styling */
+.brand-name {
+    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
+    font-size: 2.5em; /* Adjust size as needed */
+    color: #006199; /* Dark blue color for visibility */
+    margin-left: 20px; /* Adjust this for spacing from the logo */
+    flex-grow: 1; /* This will allow it to take up available space */
+    text-align: left; /* Aligns the text within its space */
 }
 
 /* Main content styling */
