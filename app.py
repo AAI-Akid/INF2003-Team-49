@@ -35,6 +35,8 @@ def index():
     return render_template('index.html', books=books, user=user)  # Pass books and user to the template
 
 
+# ** ADMIN FUNCTIONALITY **
+
 # Admin page to manage books
 @app.route('/admin')
 def admin():
@@ -181,10 +183,6 @@ def edit_book(book_id):
         return redirect(url_for('admin'))
 
 
-
-
-
-
 # Admin route to delete a book
 @app.route('/admin/delete_book/<int:book_id>', methods=['POST'])
 def delete_book(book_id):
@@ -203,7 +201,45 @@ def delete_book(book_id):
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@app.route('/admin/orders')
+def admin_view_orders():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
 
+    cursor.execute("""
+        SELECT o.order_id, o.user_id, o.order_date, o.status, o.total_price, oi.quantity, oi.price_per_unit, b.title, u.email
+        FROM orders o
+        JOIN order_items oi ON o.order_id = oi.order_id
+        JOIN books b ON oi.book_id = b.book_id
+        JOIN users u ON o.user_id = u.user_id
+        ORDER BY o.order_date DESC
+    """)
+
+    orders_data = cursor.fetchall()
+    orders = {}
+    for row in orders_data:
+        order_id = row['order_id']
+        if order_id not in orders:
+            orders[order_id] = {
+                'order_id': order_id,
+                'user_id': row['user_id'],
+                'email': row['email'],
+                'order_date': row['order_date'],
+                'status': row['status'],
+                'total_price': row['total_price'],
+                'items': []  # Initialize as an empty list
+            }
+        orders[order_id]['items'].append({
+            'title': row['title'],
+            'quantity': row['quantity'],
+            'price_per_unit': row['price_per_unit']
+        })
+    print(f"OADASDASDASD: {orders.values()}")  # Print the orders for debugging
+    cursor.close()
+    conn.close()
+
+    # Convert orders dictionary to a list for template rendering
+    return render_template('view_orders.html', orders=orders.values())
 
 
 # ** CART FUNCTIONALITY **
