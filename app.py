@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from werkzeug.utils import secure_filename
+from decimal import Decimal
 import mysql.connector
 import bcrypt
 
@@ -15,7 +16,7 @@ def get_db_connection():
     return mysql.connector.connect(
         host='localhost',
         user='root',  # Your MySQL username
-        password='NiSSanr34!',  # Your MySQL password
+        password='',  # Your MySQL password
         database='bookstore',
         port=3306  # default is 3306
     )
@@ -205,8 +206,7 @@ def allowed_file(filename):
 
 
 
-# Cart functionality
-cart = []
+# ** CART FUNCTIONALITY **
 
 @app.route('/add_to_cart/<int:book_id>', methods=['POST'])  # Allow POST requests
 def add_to_cart(book_id):
@@ -218,14 +218,31 @@ def add_to_cart(book_id):
     
     try:
         # Insert the book into the cart_items table
-        cursor.execute('INSERT INTO cart_items (user_id, book_id) VALUES (%s, %s)', (session['user_id'], book_id))
-        conn.commit()
-        
-        # Check if the insertion was successful
-        if cursor.rowcount == 0:
-            print("No rows inserted.")  # No rows were inserted
+        cursor.execute("SELECT book_id, title, price, currency FROM books WHERE book_id = %s", (book_id,))
+        book = cursor.fetchone()
+        if book:
+            # Initialize the cart if it doesn't exist in the session
+            if 'cart' not in session:
+                session['cart'] = []
+
+            # Check if the book is already in the cart
+            cart = session['cart']
+            for item in cart:
+                if item['book_id'] == book_id:
+                    item['quantity'] += 1
+                    break
+            else:
+                # Add the book to cart
+                cart.append({'book_id': book_id, 
+                             'title': book[1],
+                             'price': book[2], 
+                             'currency': book[3], 
+                             'quantity': 1})
+
+            session['cart'] = cart  # Update the cart in the session
+            flash(f'{book[1]} added to cart successfully.')
         else:
-            print("Book added to cart successfully.")  # Successfully added
+            flash('Book not found.')
 
     except mysql.connector.Error as err:
         print(f"Error: {err}")  # Print the error for debugging
@@ -241,20 +258,11 @@ def add_to_cart(book_id):
 def view_cart():
     if 'user_id' not in session:
         return redirect(url_for('login'))  # Redirect to login if not logged in
-    
-    conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
-    
-    # Fetch items from the cart for the logged-in user
-    cursor.execute('''SELECT ci.*, b.title, b.price FROM cart_items ci
-                      JOIN books b ON ci.book_id = b.book_id
-                      WHERE ci.user_id = %s''', (session['user_id'],))
-    
-    cart_items = cursor.fetchall()
-    total_price = sum(book['price'] for book in cart_items)  # Use dictionary key
-    conn.close()
-    
-    return render_template('cart.html', cart_items=cart_items, total_price=total_price)
+
+    cart = session.get('cart', [])  # Retrieve the cart from the session
+    total_price = sum(Decimal(item['price']) * item['quantity'] for item in cart)
+
+    return render_template('cart.html', cart_items=cart, total_price=total_price)
 
 
 @app.route('/clear_cart')
@@ -262,19 +270,10 @@ def clear_cart():
     if 'user_id' not in session:
         return redirect(url_for('login'))  # Redirect to login if not logged in
     
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    
-    try:
-        cursor.execute('DELETE FROM cart_items WHERE user_id = %s', (session['user_id'],))
-        conn.commit()
-    except mysql.connector.Error as err:
-        print(f"Error: {err}")  # Print the error for debugging
-    finally:
-        cursor.close()
-        conn.close()
-    
-    flash('Your cart has been cleared.')  # Optional: flash a message
+    # Clear the cart from the session
+    session.pop('cart', None)
+    flash('Your cart has been cleared.')
+
     return redirect(url_for('view_cart'))  # Redirect to the cart page
 
 
@@ -476,34 +475,34 @@ def edit_profile():
 def checkout():
     if 'user_id' not in session:
         return redirect(url_for('login'))  # Redirect to login if not logged in
-
+    
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
-    # Fetch user data from the database
-    cursor.execute('SELECT email, address FROM users WHERE user_id = %s', (session['user_id'],))
-    user_data = cursor.fetchone()
-
     # Fetch cart items for the user
-    cursor.execute('''SELECT ci.*, b.title, b.price FROM cart_items ci
-                      JOIN books b ON ci.book_id = b.book_id
-                      WHERE ci.user_id = %s''', (session['user_id'],))
-    cart_items = cursor.fetchall()
-    total_price = sum(item['price'] for item in cart_items)  # Calculate total price
+    cart = session.get('cart', [])  # Retrieve the cart from the session (list of dictionaries)
+    total_price = sum(Decimal(item['price']) * item['quantity'] for item in cart)
 
-    conn.close()
+    if request.method == 'POST' and cart:
+        # Insert new order into the orders table
+        cursor.execute('INSERT INTO orders (user_id, order_date, status, total_price) VALUES (%s, NOW(), %s, %s)',
+                       (session['user_id'], 'Pending', total_price))
+        conn.commit()
+        order_id = cursor.lastrowid  # Get the ID of the last inserted order
 
-    # If user data is found, extract email and address
-    email = user_data['email'] if user_data else ''
-    address = user_data['address'] if user_data else ''
+        # Insert each item in the cart into the order_items table
+        for item in cart:
+            cursor.execute('INSERT INTO order_items (order_id, book_id, quantity, price_per_unit) VALUES (%s, %s, %s, %s)',
+                           (order_id, item['book_id'], item['quantity'], item['price']))
+            conn.commit()
 
-    if request.method == 'POST':
-        # Handle the checkout logic here (e.g., payment processing)
-        # You would typically process payment and create an order here
-        flash('Checkout successful!')  # Replace with actual checkout logic
+        # Clear the cart after successful checkout
+        session.pop('cart', None)
+        flash('Checkout successful! Your order has been placed.')
         return redirect(url_for('index'))  # Redirect after successful checkout
 
-    return render_template('checkout.html', email=email, address=address, cart_items=cart_items, total_price=total_price)
+    return render_template('checkout.html', cart_items=cart, total_price=total_price)
+    
 
 @app.route('/remove_item', methods=['POST'])
 def remove_item():
@@ -525,12 +524,6 @@ def remove_item():
         cursor.close()
         conn.close()
     return redirect(url_for('view_cart'))  # Redirect back to the cart view
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
