@@ -57,6 +57,17 @@ CREATE TABLE `bookstore`.`order_Items` (
         ON UPDATE CASCADE
 );
 
+-- Create Inventory Table with book_id as Primary Key
+CREATE TABLE `bookstore`.`inventory` (
+    book_id TINYINT UNSIGNED NOT NULL,
+    quantity_in_stock INT UNSIGNED NOT NULL DEFAULT 0,
+    last_updated DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (book_id),
+    FOREIGN KEY (book_id) REFERENCES `bookstore`.`books`(book_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
 -- Run the following after importing dataset (don't import with book_id)
 UPDATE bookstore.books
 SET published_date = STR_TO_DATE(published_date, '%b %d, %Y');
@@ -75,3 +86,8 @@ update books set cover_image = "witcher.jpg" where book_id = 9;
 update books set cover_image = "affair.jpg" where book_id = 10;
 update books set cover_image = "OGOT.jpg" where book_id = 11;
 update books set cover_image = "deadpool.jpg" where book_id = 12;
+
+-- Generate data for inventory table
+INSERT INTO `bookstore`.`inventory` (book_id, quantity_in_stock)
+SELECT book_id, 5
+FROM `bookstore`.`books`;
