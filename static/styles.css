@@ -1,7 +1,7 @@
 /* General body styling */
 body {
-    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
-    background-color: #000000; /* Black background */
+    font-family: 'Helvetica Neue', 'Arial', sans-serif; 
+    background-color: #000000; 
     color: #333;
     margin: 0;
     padding: 20px;
@@ -14,37 +14,36 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #ffffff; /* White background for the header */
-    color: #333333; /* Change text color to contrast with white */
-    border-radius: 10px; /* Rounded borders for the header */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
-    position: relative; /* Make header relative for absolute positioning of children */
+    background-color: #ffffff; 
+    color: #333333;
+    border-radius: 10px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    position: relative; 
 }
 
-/* Header content flex styling */
 .header-content {
-    display: flex; /* Use flexbox for layout */
-    justify-content: space-between; /* Space out items */
-    align-items: center; /* Center items vertically */
-    width: 100%; /* Take full width */
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%;
 }
 
 /* Logo styling */
 .logo img {
-    height: 50px; /* Adjust height as needed */
-     margin-right: auto; /* Align logo to the left */
+    height: 50px; 
+     margin-right: auto;
 }
 
 /* Header buttons styling */
 .header-buttons {
     display: flex;
-    gap: 10px; /* Space between buttons */
+    gap: 10px; 
 }
 
 .header-buttons a {
     color: #fff;
     text-decoration: none;
-    background-color: #000000; /* Button background color */
+    background-color: #000000; 
     padding: 12px 22px;
     border-radius: 5px;
     font-size: 1em;
@@ -57,12 +56,12 @@ header {
 
 /* Brand name styling */
 .brand-name {
-    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
-    font-size: 2.5em; /* Adjust size as needed */
-    color: #006199; /* Dark blue color for visibility */
-    margin-left: 20px; /* Adjust this for spacing from the logo */
-    flex-grow: 1; /* This will allow it to take up available space */
-    text-align: left; /* Aligns the text within its space */
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
+    font-size: 2.5em; 
+    color: #006199; 
+    margin-left: 20px;
+    flex-grow: 1;
+    text-align: left;
 }
 
 /* Main content styling */
@@ -73,9 +72,9 @@ main {
 /* Heading styling */
 h1 {
     font-size: 3em;
-    color: #ffffff; /* Change to white for better visibility */
+    color: #ffffff;
     margin-bottom: 20px;
-    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
+    font-family: 'Helvetica Neue', 'Arial', sans-serif; 
 }
 
 /* Book list styling */
@@ -85,9 +84,9 @@ ul {
 }
 
 .book-item {
-    display: flex; /* Use flexbox to arrange items */
-    justify-content: space-between; /* Space between items */
-    align-items: center; /* Center items vertically */
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
     background-color: #ecf0f1;
     padding: 15px;
     margin: 10px 0;
@@ -100,16 +99,16 @@ ul {
 }
 
 .book-details {
-    flex: 1; /* Allow details to grow */
-    text-align: left; /* Align text to the left */
-    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
+    flex: 1; 
+    text-align: left; 
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
 }
 
 /* List item strong styling */
 li strong {
     font-size: 1.5em;
     color: #e74c3c;
-    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
+    font-family: 'Helvetica Neue', 'Arial', sans-serif; 
 }
 
 /* circles */
@@ -130,202 +129,200 @@ li strong {
 .circle1 {
     width: 600px; 
     height: 600px; 
-    top: -250px; /* Adjusted position */
-    left: -200px; /* Adjusted position */
+    top: -250px; 
+    left: -200px; 
 }
 
 .circle2 {
     width: 700px; 
     height: 700px; 
-    bottom: -300px; /* Adjusted position */
-    right: -200px; /* Adjusted position */
+    bottom: -300px; 
+    right: -200px;
 }
 
 .circle3 {
     width: 650px; 
     height: 650px; 
-    top: 300px; /* Adjusted position */
-    left: -150px; /* Adjusted position */
+    top: 300px; 
+    left: -150px; 
 }
 
 .circle4 {
     width: 800px; 
     height: 800px; 
-    bottom: 200px; /* Adjusted position */
-    left: 50px; /* Adjusted position */
+    bottom: 200px; 
+    left: 50px;
 }
 
-/* New circle styles */
 .circle5 {
     width: 750px; 
     height: 750px; 
-    top: 600px; /* Positioning it lower */
-    right: -350px; /* Positioning it */
+    top: 600px; 
+    right: -350px;
 }
 
 .circle6 {
     width: 900px; 
     height: 900px; 
-    bottom: 400px; /* Positioning it lower */
-    left: -450px; /* Positioning it */
+    bottom: 400px;
+    left: -450px;
 }
 
 
 
 label {
-    color: #333; /* Darken label color for contrast */
-    font-size: 1.2em; /* Increase label font size */
+    color: #333;
+    font-size: 1.2em;
 }
 
 input[type="email"],
 input[type="password"] {
-    width: 100%; /* Full-width inputs */
-    padding: 10px; /* Add some padding */
-    margin: 10px 0; /* Space between inputs */
-    border: 1px solid #ccc; /* Light gray border */
-    border-radius: 4px; /* Rounded corners */
-    text-align: center; /* Center text inside the input fields */
-    box-sizing: border-box; /* Ensures padding does not affect width */
+    width: 100%; 
+    padding: 10px; 
+    margin: 10px 0; 
+    border: 1px solid #ccc; 
+    border-radius: 4px;
+    text-align: center; 
+    box-sizing: border-box; 
 }
 
 button {
-    background-color: #28a745; /* Green background for button */
-    color: white; /* White text */
-    padding: 10px 15px; /* Button padding */
-    border: none; /* No border */
-    border-radius: 4px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 16px; /* Button text size */
-    width: 100%; /* Make button full-width */
+    background-color: #28a745; 
+    color: white; 
+    padding: 10px 15px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 16px;
+    width: 100%; 
 }
 
 button:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #218838; 
 }
 
 .signup-prompt {
-    text-align: center; /* Center the signup prompt */
-    margin-top: 20px; /* Space above */
-    color: #ffffff; /* Light blue text color */
+    text-align: center; 
+    margin-top: 20px; 
+    color: #ffffff; 
 }
 
 .signup-prompt a {
-    color: #3498db; /* Light blue link color */
+    color: #3498db; 
     text-decoration: none;
 }
 
 .signup-prompt a:hover {
-    color: #2980b9; /* Darker blue on hover */
+    color: #2980b9; 
 }
 
 .underline-signup {
     text-decoration: underline;
-    color: #3498db; /* Light blue color for the "Sign up!" */
-    cursor: pointer; /* Adds a pointer when hovered */
+    color: #3498db;
+    cursor: pointer;
 }
 
 .underline-signup:hover {
-    color: #2980b9; /* Darker blue on hover */
+    color: #2980b9; 
 }
 
 /* Clear cart button styling */
 .clear-cart-button {
-    background-color: #ff4d4d; /* Red background for clear action */
-    color: white; /* White text color */
-    padding: 10px 20px; /* Button padding */
-    border-radius: 5px; /* Rounded button corners */
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Make it behave like a button */
-    font-size: 1.2em; /* Increase font size */
-    transition: background-color 0.3s; /* Smooth transition */
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px 20px; 
+    border-radius: 5px;
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 1.2em; 
+    transition: background-color 0.3s; 
 }
 
 .clear-cart-button:hover {
-    background-color: #ff1a1a; /* Darker red on hover */
+    background-color: #ff1a1a; 
 }
 
 /* Continue shopping button styling */
 a.continue-shopping {
-    background-color: #3498db; /* Blue background for continue shopping */
-    color: white; /* White text */
-    padding: 10px 20px; /* Button padding */
-    border-radius: 5px; /* Rounded button corners */
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Make it behave like a button */
-    font-size: 1.2em; /* Increase font size */
-    transition: background-color 0.3s; /* Smooth transition */
+    background-color: #3498db; 
+    color: white; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 1.2em; 
+    transition: background-color 0.3s; 
 }
 
 a.continue-shopping:hover {
-    background-color: #2980b9; /* Darker blue on hover */
+    background-color: #2980b9; 
 }
 
-/* New CSS for button alignment */
+/* button alignment */
 .cart-actions {
-    display: flex; /* Use flexbox for alignment */
-    justify-content: space-between; /* Space between buttons */
-    align-items: center; /* Center align items vertically */
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
 }
 
 .clear-cart-button, a.continue-shopping {
-    margin: 0 10px; /* Adjust margin for spacing between buttons */
+    margin: 0 10px; 
 }
 
 
 
 .flash-message {
-    color: #ff0000; /* Choose a lighter color for visibility */
-    font-weight: bold; /* Optional: make it bold */
-    margin-top: 10px; /* Add some space above */
+    color: #ff0000; 
+    font-weight: bold;
+    margin-top: 10px; 
 }
 
 .explore-books {
-    color: #e0e0e0; /* Light gray color */
-    font-size: 1.2em; /* Optional: adjust font size */
-    /* You can add more styles here if needed */
+    color: #e0e0e0; 
+    font-size: 1.2em; 
 }
 
 /* Heading styling */
 h1 {
     font-size: 3em;
     margin-bottom: 20px;
-    font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Professional font */
+    font-family: 'Helvetica Neue', 'Arial', sans-serif; 
 }
 
 /* Adjust the heading color specifically for the login page */
 .login-header h1 {
-    color: #ffffff; /* Set to a darker color for better visibility */
+    color: #ffffff; 
 }
 
 
 /* Specific header style for the login page */
 .login-header {
-    display: flex; /* Use flexbox */
-    justify-content: flex-end; /* Align items to the right */
-    color: rgb(255, 255, 255); /* Change header text color to white */
-    margin-top: 100px; /* Add some space above the header */
-    margin-bottom: 20px; /* Optional: Add some space below the header */
-    padding-right: 1000px; /* Add some padding to the right for spacing */
-    background-color: transparent; /* Ensure the background is transparent */
+    display: flex;
+    justify-content: flex-end; 
+    color: rgb(255, 255, 255);
+    margin-top: 100px; 
+    margin-bottom: 20px; 
+    padding-right: 1000px;
+    background-color: transparent; 
 }
 
 .book-item {
-    background-color: #f9f9f9; /* Light background for each book item */
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 15px; /* Padding inside each item */
-    margin: 10px 0; /* Space between items */
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    padding: 15px;
+    margin: 10px 0; 
 }
 
 .book-details h2 {
-    margin: 0; /* Remove margin from the title */
-    font-size: 1.5em; /* Title font size */
-    color: #333; /* Dark color for the title */
+    margin: 0; 
+    font-size: 1.5em;
+    color: #333;
 }
 
 .book-details p {
-    margin: 5px 0; /* Space between paragraphs */
-    line-height: 1.5; /* Improve line height for readability */
+    margin: 5px 0; 
+    line-height: 1.5;
 }
 
 
