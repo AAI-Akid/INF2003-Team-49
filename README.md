@@ -88,7 +88,7 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 
 ![check1](mysql_installation/check1.png)
 
-9. Running rest of the scripts
+9. Running rest of the scripts (Photo does not include everything, but just run everything else in the script)
 
 ![runrest](mysql_installation/runrest.png)
 
