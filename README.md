@@ -46,6 +46,9 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 
 2. In top left, under `File` tab, select `Open SQL script`. Open `bookstore.sql` (from github repo).
 
+![Running SQL script](mysql_installation/openscript.jpg)
+
+
 3. Highlight all text (Ctrl-A), and click the lightning button (circled in red).
 ![Run SQL script](mysql_installation/script.png)
 
