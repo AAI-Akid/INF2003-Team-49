@@ -107,7 +107,7 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 2. After loading our files, head to app.py.
    - Ensure your password is correct (It is the password you set for your database!)
    - Ensure that your port is correct. (Same as your MySQLworkbench port!)
-   - PLEASE SAVE THE FILE (cntl+s) so that your password is registered!
+   - PLEASE SAVE THE FILE (ctrl+s) so that your password is registered!
      
 ![apppy1](mysql_installation/apppy1.png)
 
@@ -175,4 +175,4 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
    - To login again as a user, we suggest signing up again so you have 2 accounts with both roles.
    - Try adding/removing/editing books in our admin dashboard!
    - Try view orders too!
-   - In our normal user dashboard, browse through our collection of books, add books to cart, view your user profile to          change your details, click on books to read more about the books and many more!
+   - In our normal user dashboard, browse through our collection of books, add books to cart, view your user profile to change your details, click on books to read more about the books and many more!
