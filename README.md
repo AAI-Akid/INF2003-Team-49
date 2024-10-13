@@ -104,7 +104,74 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 
 1. Make sure requirements are installed. If not, run `pip install -r requirements.txt`.
 
-2. Run `python app.py`. Open web browser and go to `http://127.0.0.1:5000`.
+2. After loading our files, head to app.py.
+   - Ensure your password is correct (It is the password you set for your database!)
+   - Ensure that your port is correct. (Same as your MySQLworkbench port!)
+     
+![apppy1](mysql_installation/apppy1.png)
 
+3.Bring up your terminal and type in 'python app.py'
 
-![Website](mysql_installation/website.png)
+![terminal1](mysql_installation/terminalcode.png)
+
+4. Run `python app.py`. Open web browser and go to `http://127.0.0.1:5000`. (As seeb frin the photo.)
+
+![terminallink](mysql_installation/terminallink.png)
+
+5. Inserting link into browser.
+
+![browser1](mysql_installation/browser1.png)
+
+6. You have to sign up to log in. Follow these steps:
+
+![signup1](mysql_installation/signup1.png)
+
+![signup2](mysql_installation/signup2.png)
+
+7. After signingup, check if your new signup is recorded in the database.
+
+![signup2](mysql_installation/checkusers.png)
+
+8. Understand that by default, you will be given a user role so, when you login you will be redirected to the dashboard.html. (Examples below) 
+
+![signup2](mysql_installation/roleuser.png)
+
+![login](mysql_installation/login.png)
+
+![loginuser](mysql_installation/loggedinuser.png)
+
+9. To login as an admin, you have to change your role in your sql table. Follow steps as shown
+
+![script12](mysql_installation/step1.png)
+
+![script12](mysql_installation/step2.png)
+
+- Highlight all and press the lightning to run. 
+
+![script12](mysql_installation/step3.png)
+
+- Your role should now be changed to admin.
+
+![script12](mysql_installation/step4.png)
+
+- Now you have to logout and log back in. Same as before however now after you login, you will be routed to the admin dashboard.
+
+![script12](mysql_installation/logout1.png)
+
+![script12](mysql_installation/loginagain.png)
+
+![script12](mysql_installation/loggedin2.png)
+
+- IF YOUR PAGE LOOKS LIKE THIS:
+
+![script12](mysql_installation/pageissue.png)
+
+- Please RESIZE your page to make it look like this:
+
+![script12](mysql_installation/pagefixed.png)
+
+10. That's the end of the tutorial, hope you have fun!
+   - To login again as a user, we suggest signing up again so you have 2 accounts with both roles.
+   - Try adding/removing/editing books in our admin dashboard!
+   - Try view orders too!
+   - In our normal user dashboard, browse through our collection of books, add books to cart, view your user profile to          change your details, click on books to read more about the books and many more!
