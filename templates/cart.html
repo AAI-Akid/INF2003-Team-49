@@ -7,133 +7,133 @@
     <link rel="stylesheet" href="/static/styles.css">
     <style>
         body {
-            background-color: #000000; /* Light gray background */
-            font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Consistent font */
-            color: #ffffff; /* Dark text */
-            padding: 20px; /* Padding around the body */
-            display: flex; /* Flexbox for centering */
-            flex-direction: column; /* Stack children vertically */
-            align-items: center; /* Center horizontally */
+            background-color: #000000;
+            font-family: 'Helvetica Neue', 'Arial', sans-serif;
+            color: #ffffff; 
+            padding: 20px; 
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
         }
 
         /* Main heading styling */
         h1 {
             font-size: 3em;
-            color: #ffffff; /* Darker color for contrast */
-            margin-bottom: 20px; /* Space below heading */
-            text-align: center; /* Center the heading */
+            color: #ffffff;
+            margin-bottom: 20px; 
+            text-align: center; 
         }
 
         /* Cart item list styling */
         ul {
-            list-style-type: none; /* No bullet points */
-            padding: 0; /* No padding */
-            max-width: 600px; /* Max width for list */
-            width: 100%; /* Full width for responsiveness */
-            margin: 0; /* Center the list */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-            background-color: #fff; /* White background for contrast */
-            border-radius: 8px; /* Rounded corners */
-            overflow: hidden; /* Round corners */
+            list-style-type: none; 
+            padding: 0; 
+            max-width: 600px; 
+            width: 100%; 
+            margin: 0; 
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+            background-color: #fff; 
+            border-radius: 8px; 
+            overflow: hidden; 
         }
 
         /* Individual cart item styling */
         li {
-            background-color: #ffffff; /* Light gray background for items */
-            padding: 15px; /* Padding inside items */
-            margin: 10px 0; /* Margin between items */
-            border-radius: 5px; /* Rounded corners */
-            display: flex; /* Use flexbox for alignment */
-            justify-content: space-between; /* Space between title and price */
-            align-items: center; /* Center items vertically */
-            color: #333; /* Dark text */
-            transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition */
-            gap: 20px; /* Space between elements */
+            background-color: #ffffff; 
+            padding: 15px; 
+            margin: 10px 0; 
+            border-radius: 5px; 
+            display: flex; 
+            justify-content: space-between;
+            align-items: center; 
+            color: #333; 
+            transition: background-color 0.3s, box-shadow 0.3s;
+            gap: 20px; 
         }
 
         /* Additional styles for book details */
         .book-details {
-            display: flex; /* Use flexbox for arrangement */
-            align-items: center; /* Center items vertically */
-            flex-grow: 1; /* Allow this container to grow */
+            display: flex; 
+            align-items: center; 
+            flex-grow: 1; 
         }
 
         /* Styling for book title */
         .book-title {
-            font-weight: bold; /* Bold text for title */
-            font-size: 1.2em; /* Slightly larger font size */
-            margin-right: 20px; /* Space between title and price */
-            flex-grow: 1; /* Allow title to grow and take space */
+            font-weight: bold;
+            font-size: 1.2em; 
+            margin-right: 20px; 
+            flex-grow: 1; 
         }
 
         /* Styling for book price */
         .book-price {
-            font-weight: normal; /* Normal weight for price */
-            font-size: 1em; /* Default font size for price */
-            color: #2c3e50; /* Darker color for contrast */
-            margin-right: 20px; /* Space between price and button */
+            font-weight: normal; 
+            font-size: 1em; 
+            color: #2c3e50;
+            margin-right: 20px;
         }
 
         /* Styling for book quantity */
         .book-quantity {
-            font-weight: normal; /* Normal weight for quantity */
-            font-size: 1em; /* Default font size for quantity */
-            color: #2c3e50; /* Darker color for contrast */
-            margin-left: 10px; /* Space between price and quantity */
-            white-space: nowrap; /* Prevent line breaks for better alignment */
+            font-weight: normal;
+            font-size: 1em;
+            color: #2c3e50;
+            margin-left: 10px;
+            white-space: nowrap; 
         }
 
         /* Styling for remove button */
         .remove-button {
-            background-color: #ff0000; /* Red background for remove button */
-            color: white; /* White text */
-            border: none; /* No border */
-            padding: 5px 10px; /* Padding for the button */
-            cursor: pointer; /* Pointer on hover */
-            border-radius: 3px; /* Rounded corners */
-            font-size: 0.9em; /* Slightly smaller font size */
-            transition: background-color 0.3s; /* Smooth transition */
+            background-color: #ff0000; 
+            color: white; 
+            border: none; 
+            padding: 5px 10px; 
+            cursor: pointer;
+            border-radius: 3px; 
+            font-size: 0.9em;
+            transition: background-color 0.3s; 
         }
 
         .remove-button:hover {
-            background-color: #e60000; /* Darker red on hover */
+            background-color: #e60000; 
         }
 
 
         /* Hover effect for cart items */
         li:hover {
-            background-color: #d5dbdb; /* Slightly darker gray on hover */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+            background-color: #d5dbdb;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .total-price {
-            font-weight: bold; /* Bold text for total */
-            font-size: 1.5em; /* Larger font size */
-            color: #333; /* Dark text */
-            text-align: right; /* Right-align text */
-            padding: 15px; /* Padding for total item */
-            background-color: #ffffff; /* Light gray background */
-            display: flex; /* Use flexbox for alignment */
-            justify-content: space-between; /* Space between label and value */
-            border-top: 3px solid #000000; /* Add top border for separation line */
-            margin-top: 15px; /* Space above total */
+            font-weight: bold; 
+            font-size: 1.5em; 
+            color: #333; 
+            text-align: right; 
+            padding: 15px; 
+            background-color: #ffffff; 
+            display: flex; 
+            justify-content: space-between; 
+            border-top: 3px solid #000000; 
+            margin-top: 15px; 
         }
 
         /* Button styling for checkout */
         .checkout-button {
-            display: block; /* Make it a block to center */
-            width: 200px; /* Width of the button */
-            padding: 10px; /* Padding for the button */
-            margin: 20px auto; /* Center it */
-            text-align: center; /* Center text inside */
-            background-color: #4CAF50; /* Green background */
-            color: white; /* White text */
-            border: none; /* No border */
-            border-radius: 5px; /* Rounded corners */
-            font-size: 1.2em; /* Font size */
-            cursor: pointer; /* Pointer on hover */
-            text-decoration: none; /* No underline */
-            transition: background-color 0.3s; /* Smooth transition for hover effect */
+            display: block; 
+            width: 200px; 
+            padding: 10px; 
+            margin: 20px auto; 
+            text-align: center; 
+            background-color: #4CAF50; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 1.2em; 
+            cursor: pointer; 
+            text-decoration: none; 
+            transition: background-color 0.3s; 
         }
 
         /* Button hover effect */
@@ -143,29 +143,29 @@
 
         /* Button container styling */
         .button-container {
-            display: flex; /* Use flexbox for horizontal alignment */
-            justify-content: center; /* Center the buttons */
-            gap: 10px; /* Space between buttons */
-            margin: 20px 0; /* Margin above and below the buttons */
+            display: flex; 
+            justify-content: center; 
+            gap: 10px; 
+            margin: 20px 0;
         }
 
         .clear-cart-button, .continue-shopping {
-            width: 200px; /* Set a consistent width */
-            padding: 10px; /* Padding for the button */
-            text-align: center; /* Center text */
-            background-color: #ff0000; /* Red background */
-            color: white; /* White text */
-            border-radius: 5px; /* Rounded corners */
-            text-decoration: none; /* No underline */
-            transition: background-color 0.3s; /* Smooth transition */
+            width: 200px;
+            padding: 10px;
+            text-align: center; 
+            background-color: #ff0000; 
+            color: white; 
+            border-radius: 5px; 
+            text-decoration: none; 
+            transition: background-color 0.3s; 
         }
 
         .clear-cart-button:hover {
-            background-color: #e60000; /* Darker red on hover */
+            background-color: #e60000; 
         }
 
         .continue-shopping:hover {
-            background-color: #2980b9; /* Darker blue on hover */
+            background-color: #2980b9;
         }
     </style>
 </head>
