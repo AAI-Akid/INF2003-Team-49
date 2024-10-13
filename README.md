@@ -68,7 +68,7 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 
 ![Browse](mysql_installation/browse.png)
 
-![Dataset](mysql_installation/dataset.png)
+![Dataset](mysql_installation/booksfff.png)
 
 ![next](mysql_installation/next.png)
 
