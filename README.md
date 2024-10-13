@@ -59,4 +59,6 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 1. Make sure requirements are installed. If not, run `pip install -r requirements.txt`.
 
 2. Run `python app.py`. Open web browser and go to `http://127.0.0.1:5000`.
+
+
 ![Website](mysql_installation/website.png)
