@@ -50,7 +50,7 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 
 
 3. Highlight all text (Ctrl-A), and click the lightning button (circled in red).
-![Run SQL script](mysql_installation/scriptrun.jpg)
+![Run SQL script](mysql_installation/scriptrun.png)
 
 4. In the navigation pane, click `Schemas`. Make sure that `bookstore` has been created.
 
