@@ -7,33 +7,34 @@
     <link rel="stylesheet" href="/static/styles.css">
     <style>
         .logged-in {
-            padding: 10px 20px;
+            padding: 10px 20px; 
             background-color: white;
             color: #333;
-            border: 2px solid #ffffff;
-            border-radius: 5px;
-            font-size: 18px;
-            margin-right: 0px;
-            display: inline-block;
-            cursor: default;
+            border: 2px solid #ffffff; 
+            border-radius: 5px; 
+            
+            font-size: 18px; 
+            margin-right: 0px; 
+            display: inline-block; 
+            cursor: default; 
         }
 
         .header-buttons a {
-            text-decoration: none;
+            text-decoration: none; 
             padding: 10px 20px;
-            background-color: #000000;
-            color: white;
-            border-radius: 5px;
-            margin-left: 10px;
-            display: flex;
+            background-color: #000000; 
+            color: white; 
+            border-radius: 5px; 
+            margin-left: 10px; 
+            display: flex; 
             align-items: center;
-            justify-content: center;
+            justify-content: center; 
         }
 
         .book-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 100px;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 100px; 
         }
 
         .book-item {
@@ -48,11 +49,11 @@
 
         .book-item img {
             max-width: 100%;
-            height: auto;
+            height: auto; 
         }
 
         .book-info {
-            margin-bottom: 20px;
+            margin-bottom: 20px; 
         }
 
         .book-info p, h2 {
@@ -60,45 +61,33 @@
         }
 
         .add-to-cart {
-            margin-top: -30px;
+            margin-top: -30px; 
         }
 
         .add-to-cart button {
-            background-color: #007bff;
+            background-color: #007bff; 
             color: white;
-            padding: 15px 15px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
+            padding: 15px 15px; 
+            border-radius: 5px; 
+            border: none; 
+            cursor: pointer; 
         }
 
         .add-to-cart form {
             border: none;
             margin: 0;
-            padding: 0;
+            padding: 0; 
         }
 
         .add-to-cart button {
             border: none;
-            outline: none;
-            box-shadow: none;
+            outline: none; 
+            box-shadow: none; 
         }
 
-        /* Styling for the flash messages */
-        .flash-message {
-            background-color: #f8d7da; /* Light red background for error */
-            color: #721c24; /* Dark red text */
-            padding: 10px;
-            border: 1px solid #f5c6cb;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
+        
 
-        .flash-message.success {
-            background-color: #d4edda; /* Light green background for success */
-            color: #155724; /* Dark green text */
-            border: 1px solid #c3e6cb;
-        }
+
     </style>
 </head>
 <body>
@@ -109,10 +98,10 @@
             </div>
             <h2 class="brand-name">BookSearch.com</h2>
             <div class="header-buttons">
-                <span class="logged-in">Logged In</span>
+                <span class="logged-in">Logged In</span> 
                 <a href="/user_profile">View Profile</a>
-                <a href="/cart">View Cart</a>
-                <a href="/logout">Logout</a>
+                <a href="/cart">View Cart</a> 
+                <a href="/logout">Logout</a> 
             </div>
         </div>
     </header>
@@ -128,13 +117,12 @@
                 </div>
             {% endif %}
         {% endwith %}
-
         <h1>Welcome back, {{ users.username }}!</h1>
         <p class="explore-books">Explore our collection of books!</p>
         <div class="book-grid">
             {% for book in books %}
             <div class="book-item">
-                
+               
                 <div class="book-info">
                     <a href="{{ url_for('book_detail', book_id=book.book_id) }}">
                         <img src="{{ url_for('static', filename='images/books/' + book.cover_image) }}" alt="{{ book.title }} cover">
