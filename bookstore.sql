@@ -3,7 +3,7 @@ CREATE DATABASE bookstore;
 USE bookstore;
   
   -- Create Books Table
-  CREATE TABLE `bookstore`.`books` (
+  CREATE TABLE bookstore.books (
   `book_id` TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
   `author` VARCHAR(50) NOT NULL,
