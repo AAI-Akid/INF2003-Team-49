@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Inventory</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        body {
+            background-color: #f4f4f4; /* Light gray background */
+            font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Consistent font */
+            color: #333; /* Dark text */
+            padding: 20px; /* Padding around the body */
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #2c3e50; /* Darker color for contrast */
+            margin-bottom: 20px; /* Space below heading */
+            text-align: center; /* Center the heading */
+        }
+
+        table {
+            width: 100%; /* Full width for table */
+            max-width: 800px; /* Max width for table */
+            margin: 20px auto; /* Center table with margin */
+            border-collapse: collapse; /* Collapse borders */
+        }
+
+        th, td {
+            padding: 10px; /* Padding for cells */
+            text-align: left; /* Left align text */
+            border-bottom: 1px solid #ddd; /* Bottom border for cells */
+        }
+
+        img {
+            max-width: 100px; /* Limit image width */
+            max-height: 150px; /* Limit image height */
+        }
+
+        /* Button styles */
+        .nav-button {
+            padding: 10px 20px; /* Padding for buttons */
+            margin: 10px; /* Space between buttons */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer on hover */
+            font-size: 1em; /* Font size */
+            transition: background-color 0.3s; /* Smooth transition for hover effect */
+        }
+
+        .logout-button {
+            background-color: #e74c3c; /* Red background for logout */
+            color: white; /* White text */
+        }
+
+        .logout-button:hover {
+            background-color: #c0392b; /* Darker red on hover */
+        }
+
+        .back-button {
+            background-color: #3498db; /* Blue background for back */
+            color: white; /* White text */
+        }
+
+        .back-button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Book Inventory</h1>
+
+    <!-- Navigation Buttons -->
+    <div style="text-align: center;">
+        <a href="{{ url_for('logout') }}" class="nav-button logout-button">Logout</a>
+        <a href="{{ url_for('admin') }}" class="nav-button back-button">Back</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Book ID</th>
+                <th>Title</th>
+                <th>ISBN</th>
+                <th>Cover Image</th>
+                <th>Quantity in Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.book_id }}</td>
+                <td>{{ book.title }}</td>  <!-- Fixed book.title here -->
+                <td>{{ book.ISBN }}</td>
+                <td><img src="{{ url_for('static', filename='images/books/' + book.cover_image) }}" alt="{{ book.title }} cover"></td>
+                <td>{{ book.quantity_in_stock }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">No books available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

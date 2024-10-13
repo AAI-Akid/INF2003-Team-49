@@ -16,7 +16,7 @@ def get_db_connection():
     return mysql.connector.connect(
         host='localhost',
         user='root',  # Your MySQL username
-        password='Strikefreedom27!',  # Your MySQL password
+        password='',  # Your MySQL password
         database='bookstore',
         port=3306  # default is 3306
     )
@@ -203,6 +203,9 @@ def allowed_file(filename):
 
 @app.route('/admin/orders')
 def admin_view_orders():
+    if 'user_id' not in session or session.get('role') != 'admin':
+        return redirect(url_for('login_page'))  # Redirect if not admin
+
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
@@ -241,6 +244,28 @@ def admin_view_orders():
     # Convert orders dictionary to a list for template rendering
     return render_template('view_orders.html', orders=orders.values())
 
+@app.route('/admin/inventory', methods=['GET'])
+def admin_inventory():
+    if 'user_id' not in session or session.get('role') != 'admin':
+        return redirect(url_for('login_page'))  # Redirect if not admin
+    
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    # Fetch inventory data
+    cursor.execute('''
+    SELECT b.book_id, b.title, b.ISBN, b.cover_image, i.quantity_in_stock 
+    FROM books b
+    JOIN inventory i ON b.book_id = i.book_id
+    ''')
+    books = cursor.fetchall()
+    
+    cursor.close()
+    conn.close()
+    
+    return render_template('admin_inventory.html', books=books)
+
+
 
 # ** CART FUNCTIONALITY **
 
@@ -253,32 +278,39 @@ def add_to_cart(book_id):
     cursor = conn.cursor()
     
     try:
-        # Insert the book into the cart_items table
-        cursor.execute("SELECT book_id, title, price, currency FROM books WHERE book_id = %s", (book_id,))
-        book = cursor.fetchone()
-        if book:
-            # Initialize the cart if it doesn't exist in the session
-            if 'cart' not in session:
-                session['cart'] = []
+        # Check if the book is in stock
+        cursor.execute("SELECT quantity_in_stock FROM inventory WHERE book_id = %s", (book_id,))
+        inventory = cursor.fetchone()
+        
+        if inventory and inventory[0] > 0:
+            # Get the book details from the books table
+            cursor.execute("SELECT book_id, title, price, currency FROM books WHERE book_id = %s", (book_id,))
+            book = cursor.fetchone()
+            if book:
+                # Initialize the cart if it doesn't exist in the session
+                if 'cart' not in session:
+                    session['cart'] = []
 
-            # Check if the book is already in the cart
-            cart = session['cart']
-            for item in cart:
-                if item['book_id'] == book_id:
-                    item['quantity'] += 1
-                    break
+                # Check if the book is already in the cart
+                cart = session['cart']
+                for item in cart:
+                    if item['book_id'] == book_id:
+                        item['quantity'] += 1
+                        break
+                else:
+                    # Add the book to the cart
+                    cart.append({'book_id': book_id, 
+                                 'title': book[1],
+                                 'price': book[2], 
+                                 'currency': book[3], 
+                                 'quantity': 1})
+
+                session['cart'] = cart  # Update the cart in the session
+                flash(f'{book[1]} added to cart successfully.')
             else:
-                # Add the book to cart
-                cart.append({'book_id': book_id, 
-                             'title': book[1],
-                             'price': book[2], 
-                             'currency': book[3], 
-                             'quantity': 1})
-
-            session['cart'] = cart  # Update the cart in the session
-            flash(f'{book[1]} added to cart successfully.')
+                flash('Book not found.')
         else:
-            flash('Book not found.')
+            flash('This book is out of stock.')
 
     except mysql.connector.Error as err:
         print(f"Error: {err}")  # Print the error for debugging
@@ -287,8 +319,6 @@ def add_to_cart(book_id):
         conn.close()
     
     return redirect(url_for('dashboard'))  # Redirect back to dashboard after adding to cart
-
-
 
 @app.route('/cart')
 def view_cart():
@@ -520,24 +550,53 @@ def checkout():
     total_price = sum(Decimal(item['price']) * item['quantity'] for item in cart)
 
     if request.method == 'POST' and cart:
-        # Insert new order into the orders table
-        cursor.execute('INSERT INTO orders (user_id, order_date, status, total_price) VALUES (%s, NOW(), %s, %s)',
-                       (session['user_id'], 'Pending', total_price))
-        conn.commit()
-        order_id = cursor.lastrowid  # Get the ID of the last inserted order
+        try:
+            # Start a transaction
+            conn.start_transaction()
 
-        # Insert each item in the cart into the order_items table
-        for item in cart:
-            cursor.execute('INSERT INTO order_items (order_id, book_id, quantity, price_per_unit) VALUES (%s, %s, %s, %s)',
-                           (order_id, item['book_id'], item['quantity'], item['price']))
+            # Check inventory for each item in the cart
+            for item in cart:
+                cursor.execute('SELECT quantity_in_stock FROM inventory WHERE book_id = %s', (item['book_id'],))
+                stock = cursor.fetchone()
+                
+                if not stock or stock['quantity_in_stock'] < item['quantity']:
+                    flash(f"Not enough stock for {item['title']}. Available stock: {stock['quantity_in_stock'] if stock else 0}", "error")
+                    return redirect(url_for('checkout'))  # Redirect back to checkout page
+            
+            # Insert new order into the orders table
+            cursor.execute('INSERT INTO orders (user_id, order_date, status, total_price) VALUES (%s, NOW(), %s, %s)',
+                           (session['user_id'], 'Pending', total_price))
+            conn.commit()
+            order_id = cursor.lastrowid  # Get the ID of the last inserted order
+
+            # Insert each item in the cart into the order_items table and update stock quantity
+            for item in cart:
+                cursor.execute('INSERT INTO order_items (order_id, book_id, quantity, price_per_unit) VALUES (%s, %s, %s, %s)',
+                               (order_id, item['book_id'], item['quantity'], item['price']))
+                
+                # Update inventory: subtract the purchased quantity from the stock
+                cursor.execute('UPDATE inventory SET quantity_in_stock = quantity_in_stock - %s WHERE book_id = %s',
+                               (item['quantity'], item['book_id']))
+
+            # Commit the transaction
             conn.commit()
 
-        # Clear the cart after successful checkout
-        session.pop('cart', None)
-        flash('Checkout successful! Your order has been placed.')
-        return redirect(url_for('dashboard'))
+            # Clear the cart after successful checkout
+            session.pop('cart', None)
+            flash('Checkout successful! Your order has been placed.', 'success')
+            return redirect(url_for('dashboard'))
 
+        except mysql.connector.Error as err:
+            # Rollback the transaction if any error occurs
+            conn.rollback()
+            flash('An error occurred during checkout. Please try again later.', 'error')
+            print(f"Error: {err}")  # Print the error for debugging
+        finally:
+            cursor.close()
+            conn.close()
+    
     return render_template('checkout.html', cart_items=cart, total_price=total_price)
+
     
 
 @app.route('/remove_item', methods=['POST'])

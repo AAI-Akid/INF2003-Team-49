@@ -6,6 +6,23 @@
     <title>Checkout</title>
     <link rel="stylesheet" href="/static/styles.css">
     <style>
+        .flash-message {
+            background-color: #dff0d8; /* Light green background */
+            color: #3c763d; /* Dark green text */
+            padding: 15px; /* Padding around message */
+            border: 1px solid #d6e9c6; /* Border for message */
+            border-radius: 5px; /* Rounded corners */
+            margin-bottom: 20px; /* Space below message */
+            width: 100%; /* Full width for responsiveness */
+            max-width: 600px; /* Max width for message */
+            text-align: center; /* Center text */
+        }
+
+        .flash-error {
+            background-color: #f2dede; /* Light red background for errors */
+            color: #a94442; /* Dark red text */
+            border: 1px solid #ebccd1; /* Border for error message */
+        }
         body {
             background-color: #f4f4f4; /* Light gray background */
             font-family: 'Helvetica Neue', 'Arial', sans-serif; /* Consistent font */
@@ -124,6 +141,17 @@
 </head>
 <body>
     <h1>Checkout</h1>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message{% if category == 'error' %} flash-error{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     
     <h2>Your Cart Items</h2>
     <table>
