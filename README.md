@@ -70,9 +70,9 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 
 ![Dataset](mysql_installation/booksfff.png)
 
-![next](mysql_installation/next.png)
+![next](mysql_installation/booksfff2.png)
 
-![existingtable](mysql_installation/existingtable.png)
+![existingtable](mysql_installation/booksfff3.png)
 
 7. Remember to untick book_id!
 
