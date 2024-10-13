@@ -51,8 +51,8 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 ![Running SQL script2](mysql_installation/sqlscript.jpg)
 
 
-3. Highlight all text (Ctrl-A), and click the lightning button (circled in red).
-![Run SQL script](mysql_installation/scriptrun.png)
+3. Highlight text show in photo below, and click the lightning button (circled in red).
+![Run SQL script](mysql_installation/firststep.png)
 
 4. Refresh the SCHEMAS on the left.
 
