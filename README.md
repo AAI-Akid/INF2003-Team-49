@@ -1,5 +1,6 @@
 # INF2003-Team-49
 Database Systems Project
+VIEW HERE: https://github.com/AAI-Akid/INF2003-Team-49/blob/main/README.md
 
 ## Downloading MySQL Server and Workbench
 Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
