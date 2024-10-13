@@ -62,13 +62,9 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 
 ![Bookstore DB added](mysql_installation/schemas.png)
 
-6. Refresh the SCHEMAS on the left.
+6. Import table found in Github Repo named: trimmed_books_data50rows.csv. Steps:
 
-![Schema Refresh](mysql_installation/refresh.png)
-
-7. Import table found in Github Repo named: trimmed_books_data50rows.csv. Steps:
-
-![Import Table Data Wizard](mysql_installation/tabledataimport.png)
+![Import Table Data Wizard](mysql_installation/tableimportdatawizard.png)
 
 ![Browse](mysql_installation/browse.png)
 
