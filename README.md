@@ -50,6 +50,8 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 ![Run SQL script](mysql_installation/script.png)
 
 4. In the navigation pane, click `Schemas`. Make sure that `bookstore` has been created.
+
+
 ![Bookstore DB added](mysql_installation/schemas.png)
 
 ## Running app.py
