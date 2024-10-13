@@ -48,7 +48,7 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 
 ![Running SQL script](mysql_installation/openscript.jpg)
 
-![Running SQL script2](mysql_installation/sqlscript.jpg)
+![Running SQL script2](mysql_installation/sqlscript.png)
 
 
 3. Highlight text show in photo below, and click the lightning button (circled in red).
