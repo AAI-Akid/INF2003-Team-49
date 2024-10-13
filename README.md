@@ -16,22 +16,28 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 
 ![Execute Installation](mysql_installation/installation.png)
 
-3. Configure MySQL Server (if you have MariaDB installed, its most likely running on port 3306. Change the port for your MySQL Server to another available port, e.g. 3307).
+4. Configure MySQL Server (if you have MariaDB installed, its most likely running on port 3306. Change the port for your MySQL Server to another available port, e.g. 3307).
+
+
 ![MySQL Server Configuration](mysql_installation/mysqlserver.png)
 
-4. Use strong password authentication
+5. Use strong password authentication
+
+
 ![Authentication Method](mysql_installation/auth.png)
 
-5. Set root user password (your own password)
+6.  Set root user password (your own password)
 
-6. Start MySQL Server at System Startup. Use Standard System Account. Apply configuration.
+7. Start MySQL Server at System Startup. Use Standard System Account. Apply configuration.
 
-7. Use default configuration for other MySQL products.
+8. Use default configuration for other MySQL products.
 
-8. Check to see if can connect to server. If not check if password and username (default root) is correct.
+9.  Check to see if can connect to server. If not check if password and username (default root) is correct.
+
+
 ![alt text](mysql_installation/connection.png)
 
-9. Start MySQL workbench after setup.
+10. Start MySQL workbench after setup.
 
 ## Setting up database
 
