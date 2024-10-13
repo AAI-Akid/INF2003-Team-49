@@ -107,7 +107,7 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 2. After loading our files, head to app.py.
    - Ensure your password is correct (It is the password you set for your database!)
    - Ensure that your port is correct. (Same as your MySQLworkbench port!)
-   - 
+     
 ![apppy1](mysql_installation/apppy1.png)
 
 3.Bring up your terminal and type in 'python app.py'
