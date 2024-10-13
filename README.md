@@ -74,15 +74,31 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 
 ![existingtable](mysql_installation/existingtable.png)
 
+7. Remember to untick book_id!
+
 ![Untick book id](mysql_installation/untickbookid.png)
 
 ![Final](mysql_installation/final.png)
 
 ![Finish 1](mysql_installation/finish1.png)
 
-
 ![Finish 2](mysql_installation/finish2.png)
 
+8. Checking if data has been imported correctly
+
+![check1](mysql_installation/check1.png)
+
+9. Running rest of the scripts
+
+![runrest](mysql_installation/runrest.png)
+
+10. Refresh Schema to check if everything is in
+
+![runrest](mysql_installation/refreshfinal.png)
+
+11. Your final schema page should look like this
+
+![schemafinal](mysql_installation/finalschema.png)
 
 ## Running app.py
 
