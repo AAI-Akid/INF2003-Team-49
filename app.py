@@ -547,19 +547,30 @@ def remove_item():
 
     item_id = request.form['item_id']  # Get the item_id from the form
 
-    conn = get_db_connection()
-    cursor = conn.cursor()
+    # Check if the cart exists in the session
+    if 'cart' not in session:
+        flash('Your cart is empty.')  # Optionally notify the user
+        return redirect(url_for('view_cart'))
 
-    try:
-        # Delete the item from the cart using cart_items.id
-        cursor.execute('DELETE FROM cart_items WHERE user_id = %s AND id = %s', (session['user_id'], item_id))  # Use item_id
-        conn.commit()
-    except mysql.connector.Error as err:
-        print(f"Error: {err}")  # Log any error for debugging
-    finally:
-        cursor.close()
-        conn.close()
+    # Get the cart from the session
+    cart = session['cart']
+
+    # Try to find and remove the item from the cart
+    for item in cart:
+        if item['book_id'] == int(item_id):  # Match the book_id
+            if item['quantity'] > 1:
+                item['quantity'] -= 1  # Decrease quantity if more than 1
+            else:
+                cart.remove(item)  # Remove the item from the cart if quantity is 1
+            flash(f'{item["title"]} removed from cart successfully.')  # Notify user
+            break
+    else:
+        flash('Item not found in your cart.')  # Optionally notify if the item was not found
+
+    session['cart'] = cart  # Update the session with the modified cart
+
     return redirect(url_for('view_cart'))  # Redirect back to the cart view
+
 
 @app.route('/delete_order', methods=['POST'])
 def delete_order():

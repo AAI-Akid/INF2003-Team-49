@@ -48,12 +48,14 @@
             align-items: center; /* Center items vertically */
             color: #333; /* Dark text */
             transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition */
+            gap: 20px; /* Space between elements */
         }
 
-        /* Hover effect for cart items */
-        li:hover {
-            background-color: #d5dbdb; /* Slightly darker gray on hover */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+        /* Additional styles for book details */
+        .book-details {
+            display: flex; /* Use flexbox for arrangement */
+            align-items: center; /* Center items vertically */
+            flex-grow: 1; /* Allow this container to grow */
         }
 
         /* Styling for book title */
@@ -63,12 +65,22 @@
             margin-right: 20px; /* Space between title and price */
             flex-grow: 1; /* Allow title to grow and take space */
         }
+
         /* Styling for book price */
         .book-price {
             font-weight: normal; /* Normal weight for price */
             font-size: 1em; /* Default font size for price */
             color: #2c3e50; /* Darker color for contrast */
             margin-right: 20px; /* Space between price and button */
+        }
+
+        /* Styling for book quantity */
+        .book-quantity {
+            font-weight: normal; /* Normal weight for quantity */
+            font-size: 1em; /* Default font size for quantity */
+            color: #2c3e50; /* Darker color for contrast */
+            margin-left: 10px; /* Space between price and quantity */
+            white-space: nowrap; /* Prevent line breaks for better alignment */
         }
 
         /* Styling for remove button */
@@ -80,10 +92,18 @@
             cursor: pointer; /* Pointer on hover */
             border-radius: 3px; /* Rounded corners */
             font-size: 0.9em; /* Slightly smaller font size */
+            transition: background-color 0.3s; /* Smooth transition */
         }
 
         .remove-button:hover {
             background-color: #e60000; /* Darker red on hover */
+        }
+
+
+        /* Hover effect for cart items */
+        li:hover {
+            background-color: #d5dbdb; /* Slightly darker gray on hover */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow on hover */
         }
 
         .total-price {
@@ -158,13 +178,15 @@
         {% else %}
             {% for book in cart_items %}
             <li>
-                <span class="book-title">{{ book['title'] }}</span>
-                <span class="book-price">${{ book['price'] }}</span>
+                <div class="book-details">
+                    <span class="book-title">{{ book['title'] }}</span>
+                    <span class="book-price">${{ book['price'] }}</span>
+                    <span class="book-quantity">x {{ book['quantity'] }}</span>  <!-- Display quantity -->
+                </div>
                 <form action="{{ url_for('remove_item') }}" method="POST">
-                    <input type="hidden" name="item_id" value="{{ book.id }}">
+                    <input type="hidden" name="item_id" value="{{ book.book_id }}">
                     <button type="submit" class="remove-button">Remove</button>
                 </form>
-                
             </li>
             {% endfor %}
             <li class="total-price">
@@ -173,14 +195,12 @@
             </li>
         {% endif %}
     </ul>
-    
-    
 
     <div class="button-container">
         <a href="/clear_cart" class="clear-cart-button">Clear Cart</a>
         <a href="/dashboard" class="continue-shopping">Continue Shopping</a>
     </div>
-    
+
     <a href="/checkout" class="checkout-button">Checkout</a>
 
     <div class="circle1"></div>
