@@ -4,7 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - View All Orders</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 2rem;
+            color: #555;
+        }
+
+        .order {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin: 10px 0;
+            width: 80%;
+            max-width: 800px;
+            border-left: 6px solid #007bff;
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #007bff;
+        }
+
+        p {
+            margin: 8px 0;
+            font-size: 1rem;
+            color: #444;
+        }
+
+        h4 {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #555;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 20px 0;
+            width: 80%;
+        }
+
+        @media (max-width: 600px) {
+            .order {
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>All Orders</h1>
