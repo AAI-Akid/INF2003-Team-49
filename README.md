@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/ac70ae15-d02f-4513-b85f-c7b437709801)![image](https://github.com/user-attachments/assets/20804c34-abed-4281-8229-cb6952206edb)![image](https://github.com/user-attachments/assets/5c98bb7e-91b2-4e89-a674-8d7615f0a631)# INF2003-Team-49
+# INF2003-Team-49
 Database Systems Project
 
 ## Downloading MySQL Server and Workbench
