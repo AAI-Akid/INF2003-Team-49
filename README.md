@@ -90,7 +90,11 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 
 9. Running rest of the scripts (Photo does not include everything, but just run everything else in the script)
 
-![runrest](mysql_installation/runrest.png)
+![runrest](mysql_installation/111.png)
+![runrest](mysql_installation/222.png)
+![runrest](mysql_installation/333.png)
+![runrest](mysql_installation/444.png)
+![runrest](mysql_installation/555.png)
 
 10. Refresh Schema to check if everything is in
 
