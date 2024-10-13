@@ -11,7 +11,9 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
    
 ![Full Setup Type](mysql_installation/setuptype.png)
 
-4. Click 'execute' to install all products.
+3. Click 'execute' to install all products.
+
+
 ![Execute Installation](mysql_installation/installation.png)
 
 3. Configure MySQL Server (if you have MariaDB installed, its most likely running on port 3306. Change the port for your MySQL Server to another available port, e.g. 3307).
