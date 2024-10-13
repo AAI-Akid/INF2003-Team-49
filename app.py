@@ -578,19 +578,18 @@ def delete_order():
         # Check if the row was deleted (affected rows)
         if cursor.rowcount > 0:
             conn.commit()  # Commit the transaction if deletion was successful
-            flash(f'Order {order_id} has been deleted.', 'success')
+            print(f'Order {order_id} has been deleted.')  # Log successful deletion
         else:
-            flash(f'Order {order_id} not found.', 'error')
+            print(f'Order {order_id} not found.')  # Log if the order was not found
 
     except Exception as err:
         print(f"Error deleting order: {err}")  # Log any error for debugging
-        flash('An error occurred while trying to delete the order.', 'error')
         conn.rollback()  # Rollback in case of error
     finally:
         cursor.close()
         conn.close()
 
-    return redirect(url_for('admin_view_orders'))
+    return redirect(url_for('admin_view_orders'))  # Redirect back to the orders page
 
 @app.route('/update_order_status', methods=['POST'])
 def update_order_status():
@@ -610,21 +609,18 @@ def update_order_status():
         # Check if the row was updated (affected rows)
         if cursor.rowcount > 0:
             conn.commit()  # Commit the transaction if the update was successful
-            flash(f'Status of Order {order_id} updated to {new_status}.', 'success')
         else:
-            flash(f'Order {order_id} not found.', 'error')
+            print(f'Order {order_id} not found.')  # Log if the order was not found
 
     except Exception as err:
         print(f"Error updating order status: {err}")  # Log any error for debugging
-        flash('An error occurred while trying to update the order status.', 'error')
         conn.rollback()  # Rollback in case of error
+
     finally:
         cursor.close()  # Close the cursor
         conn.close()  # Close the connection
 
     return redirect(url_for('admin_view_orders'))  # Redirect back to the orders page
-
-
 
 
 if __name__ == '__main__':
