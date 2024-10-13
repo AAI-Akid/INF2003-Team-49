@@ -97,10 +97,10 @@
             </div>
             <h2 class="brand-name">BookSearch.com</h2>
             <div class="header-buttons">
-                <span class="logged-in">Logged In</span> <!-- Unclickable logged in button -->
-                <a href="/user_profile">View Profile</a><!-- View profile -->
-                <a href="/cart">View Cart</a> <!-- Added View Cart link -->
-                <a href="/logout">Logout</a> <!-- Option to logout -->
+                <span class="logged-in">Logged In</span>
+                <a href="/user_profile">View Profile</a>
+                <a href="/cart">View Cart</a>
+                <a href="/logout">Logout</a>
             </div>
         </div>
     </header>
@@ -111,7 +111,7 @@
         <div class="book-grid">
             {% for book in books %}
             <div class="book-item">
-                <!-- Book information block -->
+                
                 <div class="book-info">
                     <a href="{{ url_for('book_detail', book_id=book.book_id) }}">
                         <img src="{{ url_for('static', filename='images/books/' + book.cover_image) }}" alt="{{ book.title }} cover">
@@ -120,7 +120,7 @@
                         <p>Rating: {{ book.rating }}</p>
                     </a>
                 </div>
-                <!-- Add to Cart button -->
+                
                 <div class="add-to-cart">
                     <form action="{{ url_for('add_to_cart', book_id=book.book_id) }}" method="POST">
                         <button type="submit">Add to Cart</button>
