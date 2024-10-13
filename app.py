@@ -535,7 +535,7 @@ def checkout():
         # Clear the cart after successful checkout
         session.pop('cart', None)
         flash('Checkout successful! Your order has been placed.')
-        return redirect(url_for('dashboard'))  # Redirect after successful checkout
+        return redirect(url_for('dashboard'))
 
     return render_template('checkout.html', cart_items=cart, total_price=total_price)
     
@@ -545,12 +545,11 @@ def remove_item():
     if 'user_id' not in session:
         return redirect(url_for('login'))  # Ensure the user is logged in
 
-    item_id = request.form['item_id']  # Get the item_id from the form
+    item_id = request.form['item_id']
 
     # Check if the cart exists in the session
     if 'cart' not in session:
-        flash('Your cart is empty.')  # Optionally notify the user
-        return redirect(url_for('view_cart'))
+        return redirect(url_for('view_cart'))  # Redirect if the cart is empty
 
     # Get the cart from the session
     cart = session['cart']
@@ -562,19 +561,19 @@ def remove_item():
                 item['quantity'] -= 1  # Decrease quantity if more than 1
             else:
                 cart.remove(item)  # Remove the item from the cart if quantity is 1
-            flash(f'{item["title"]} removed from cart successfully.')  # Notify user
             break
     else:
-        flash('Item not found in your cart.')  # Optionally notify if the item was not found
+        pass
 
     session['cart'] = cart  # Update the session with the modified cart
 
-    return redirect(url_for('view_cart'))  # Redirect back to the cart view
+    return redirect(url_for('view_cart'))
+
 
 
 @app.route('/delete_order', methods=['POST'])
 def delete_order():
-    order_id = request.form['order_id']  # Get the order ID from the form
+    order_id = request.form['order_id']
 
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -583,12 +582,11 @@ def delete_order():
         # Log the query for debugging purposes
         print(f"Deleting order {order_id}")
 
-        # Execute the DELETE query for the order, without checking the user ID
         cursor.execute('DELETE FROM orders WHERE order_id = %s', (order_id,))
 
         # Check if the row was deleted (affected rows)
         if cursor.rowcount > 0:
-            conn.commit()  # Commit the transaction if deletion was successful
+            conn.commit()
             print(f'Order {order_id} has been deleted.')  # Log successful deletion
         else:
             print(f'Order {order_id} not found.')  # Log if the order was not found
@@ -600,14 +598,14 @@ def delete_order():
         cursor.close()
         conn.close()
 
-    return redirect(url_for('admin_view_orders'))  # Redirect back to the orders page
+    return redirect(url_for('admin_view_orders'))
 
 @app.route('/update_order_status', methods=['POST'])
 def update_order_status():
-    order_id = request.form['order_id']  # Get the order ID from the form
-    new_status = request.form['status']  # Get the new status from the form
+    order_id = request.form['order_id']
+    new_status = request.form['status']
 
-    conn = get_db_connection()  # Get the database connection
+    conn = get_db_connection()
     cursor = conn.cursor()
 
     try:
@@ -619,19 +617,19 @@ def update_order_status():
 
         # Check if the row was updated (affected rows)
         if cursor.rowcount > 0:
-            conn.commit()  # Commit the transaction if the update was successful
+            conn.commit()
         else:
             print(f'Order {order_id} not found.')  # Log if the order was not found
 
     except Exception as err:
         print(f"Error updating order status: {err}")  # Log any error for debugging
-        conn.rollback()  # Rollback in case of error
+        conn.rollback()
 
     finally:
-        cursor.close()  # Close the cursor
-        conn.close()  # Close the connection
+        cursor.close()
+        conn.close()
 
-    return redirect(url_for('admin_view_orders'))  # Redirect back to the orders page
+    return redirect(url_for('admin_view_orders'))
 
 
 if __name__ == '__main__':
