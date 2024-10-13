@@ -98,7 +98,7 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 
 11. Your final schema page should look like this
 
-![schemafinal](mysql_installation/finalschema.png)
+![schemafinal](mysql_installation/finalschemas2.png)
 
 ## Running app.py
 
