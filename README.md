@@ -114,7 +114,7 @@ Download MySQL installer here: https://dev.mysql.com/downloads/installer/.
 
 ![terminal1](mysql_installation/terminalcode.png)
 
-4. Run `python app.py`. Open web browser and go to `http://127.0.0.1:5000`. (As seeb frin the photo.)
+4. Run `python app.py`. Open web browser and go to `http://127.0.0.1:5000`. (As seen from the photos.)
 
 ![terminallink](mysql_installation/terminallink.png)
 
