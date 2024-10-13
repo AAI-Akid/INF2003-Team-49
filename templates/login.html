@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="/static/styles.css">  <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="/static/styles.css"> 
     <style>
-        /* Reset margin and padding to remove unwanted white lines */
         html, body {
             margin: 0;
             padding: 0;
@@ -93,8 +92,8 @@
 </head>
 <body>
         <main>
-        <form id="login-form" method="POST" action="/login">  <!-- Ensure action is set correctly -->
-            <h2>Login</h2>  <!-- This acts as the form title -->
+        <form id="login-form" method="POST" action="/login">
+            <h2>Login</h2>
             <label for="email" class="form-label">Email:</label>
             <input type="email" id="email" name="email" required>
 
@@ -115,7 +114,7 @@
         {% if messages %}
             <ul>
             {% for message in messages %}
-                <li class="flash-message">{{ message }}</li> <!-- Use the new class here -->
+                <li class="flash-message">{{ message }}</li>
             {% endfor %}
             </ul>
         {% endif %}

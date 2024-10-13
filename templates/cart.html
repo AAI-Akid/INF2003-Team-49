@@ -138,7 +138,7 @@
 
         /* Button hover effect */
         .checkout-button:hover {
-            background-color: #45a049; /* Darker green on hover */
+            background-color: #45a049;
         }
 
         /* Button container styling */
@@ -160,7 +160,6 @@
             transition: background-color 0.3s; /* Smooth transition */
         }
 
-        /* Additional links hover effect */
         .clear-cart-button:hover {
             background-color: #e60000; /* Darker red on hover */
         }
@@ -181,7 +180,7 @@
                 <div class="book-details">
                     <span class="book-title">{{ book['title'] }}</span>
                     <span class="book-price">${{ book['price'] }}</span>
-                    <span class="book-quantity">x {{ book['quantity'] }}</span>  <!-- Display quantity -->
+                    <span class="book-quantity">x {{ book['quantity'] }}</span>
                 </div>
                 <form action="{{ url_for('remove_item') }}" method="POST">
                     <input type="hidden" name="item_id" value="{{ book.book_id }}">

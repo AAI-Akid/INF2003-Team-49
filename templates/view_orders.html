@@ -56,88 +56,85 @@
             gap: 10px;
         }
         .delete-button, .update-button {
-    background-color: #f10e0e;  /* Lighter red for better visibility */
-    color: white;  /* White text for contrast */
-    font-size: 16px;  /* Increase font size */
-    font-weight: bold;  /* Bold text */
-    padding: 10px 20px;  /* Increase padding for bigger buttons */
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);  /* Add shadow for depth */
-    transition: all 0.3s ease;  /* Smooth transition for hover effects */
-}
-
-.update-button {
-    background-color: #009f25;  /* Bright green */
-}
-
-.delete-button:hover, .update-button:hover {
-    background-color: #ff1a1a;  /* Darker red on hover for delete */
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);  /* Larger shadow on hover */
-}
-
-.update-button:hover {
-    background-color: #218838;  /* Darker green on hover for update */
-}
-
-        select {
-            padding: 5px;
-            border-radius: 4px;
+            background-color: #f10e0e;  /* Lighter red for better visibility */
+            color: white;  /* White text for contrast */
+            font-size: 16px;  /* Increase font size */
+            font-weight: bold;  /* Bold text */
+            padding: 10px 20px;  /* Increase padding for bigger buttons */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);  /* Add shadow for depth */
+            transition: all 0.3s ease;  /* Smooth transition for hover effects */
         }
-    </style>
-</head>
-<body>
-    <div class="navbar">
-        <a href="/admin">Back</a>
-        <a href="{{ url_for('logout') }}">Logout</a>
-    </div>
 
-    <h1>All Orders</h1>
+        .update-button {
+            background-color: #009f25;  /* Bright green */
+        }
 
-    {% if orders %}
-        {% for order in orders %}
-            <div class="order">
-                <h3>Order ID: {{ order.order_id }} | User Email: {{ order.email }}</h3>
-                <p>Order Date: {{ order.order_date }}</p>
-                <p>Status: {{ order.status }}</p>
-                <p>Total Price: ${{ order.total_price }}</p>
+        .delete-button:hover, .update-button:hover {
+            background-color: #ff1a1a;  /* Darker red on hover for delete */
+            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);  /* Larger shadow on hover */
+        }
 
-                <h4>Items:</h4>
-                <ul>
-                    {% for item in order['items'] %}
-                        <li>
-                            <strong>Book:</strong> {{ item.title }}<br>
-                            <strong>Quantity:</strong> {{ item.quantity }}<br>
-                            <strong>Price per Unit:</strong> ${{ item.price_per_unit }}
-                        </li>
-                    {% endfor %}
-                </ul>
+        .update-button:hover {
+            background-color: #218838;  /* Darker green on hover for update */
+        }
 
-                <!-- Delete Button Form -->
-                <div class="action-buttons">
-                    <form action="{{ url_for('delete_order') }}" method="POST" style="display:inline;">
-                        <input type="hidden" name="order_id" value="{{ order.order_id }}">
-                        <button type="submit" class="delete-button">Delete Order</button>
-                    </form>
-
-                    <!-- Update Status Form -->
-<form action="{{ url_for('update_order_status') }}" method="POST" style="display:inline;">
-    <input type="hidden" name="order_id" value="{{ order.order_id }}">
-    <select name="status" required>
-        <option value="Shipped" {% if order.status == 'Shipped' %}selected{% endif %}>Shipped</option>
-        <option value="Delivered" {% if order.status == 'Delivered' %}selected{% endif %}>Delivered</option>
-        <option value="Cancelled" {% if order.status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
-    </select>
-    <button type="submit" name="submit" value="update_status" class="update-button">Update Status</button>
-</form>
-
-                </div>
+                select {
+                    padding: 5px;
+                    border-radius: 4px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="navbar">
+                <a href="/admin">Back</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
             </div>
-            <hr>
-        {% endfor %}
-    {% else %}
-        <p>No orders found.</p>
-    {% endif %}
-</body>
-</html>
+
+            <h1>All Orders</h1>
+
+            {% if orders %}
+                {% for order in orders %}
+                    <div class="order">
+                        <h3>Order ID: {{ order.order_id }} | User Email: {{ order.email }}</h3>
+                        <p>Order Date: {{ order.order_date }}</p>
+                        <p>Status: {{ order.status }}</p>
+                        <p>Total Price: ${{ order.total_price }}</p>
+
+                        <h4>Items:</h4>
+                        <ul>
+                            {% for item in order['items'] %}
+                                <li>
+                                    <strong>Book:</strong> {{ item.title }}<br>
+                                    <strong>Quantity:</strong> {{ item.quantity }}<br>
+                                    <strong>Price per Unit:</strong> ${{ item.price_per_unit }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="action-buttons">
+                            <form action="{{ url_for('delete_order') }}" method="POST" style="display:inline;">
+                                <input type="hidden" name="order_id" value="{{ order.order_id }}">
+                                <button type="submit" class="delete-button">Delete Order</button>
+                            </form>
+
+                            <form action="{{ url_for('update_order_status') }}" method="POST" style="display:inline;">
+                            <input type="hidden" name="order_id" value="{{ order.order_id }}">
+                            <select name="status" required>
+                            <option value="Shipped" {% if order.status == 'Shipped' %}selected{% endif %}>Shipped</option>
+                            <option value="Delivered" {% if order.status == 'Delivered' %}selected{% endif %}>Delivered</option>
+                            <option value="Cancelled" {% if order.status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                            </select>
+                            <button type="submit" name="submit" value="update_status" class="update-button">Update Status</button>
+                            </form>
+
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            {% else %}
+                <p>No orders found.</p>
+            {% endif %}
+        </body>
+        </html>
